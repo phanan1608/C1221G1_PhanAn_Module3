@@ -27,11 +27,11 @@ VALUES
 ("C0222G2");
 
 USE my_database1;
-CREATE TABLE teacher( 
-	id INT AUTO_INCREMENT NOT NULL KEY,
+CREATE TABLE teacher (
+    id INT AUTO_INCREMENT NOT NULL KEY,
     name VARCHAR(45),
     age INT,
-    country VARCHAR(45) 
+    country VARCHAR(45)
 );
 INSERT INTO my_database1.teacher
 (name, age,country)
@@ -39,12 +39,3 @@ VALUES
 ("ChanhTV",37,"VN"),
 ("ChienTV",27,"VN"),
 ("HaiTT",27,"VN");
-
-
-
-
-
-
-
-
-
