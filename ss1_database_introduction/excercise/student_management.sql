@@ -1,6 +1,6 @@
 CREATE DATABASE `my_database1`;
 CREATE TABLE my_database1.student (
-    id INT KEY NOT NULL AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     student_name VARCHAR(45),
     age INT,
     country VARCHAR(45)
@@ -15,7 +15,7 @@ VALUES
 
 USE my_database1;
 CREATE TABLE class (
-    id INT NOT NULL AUTO_INCREMENT KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT KEY,
     class_name VARCHAR(45)
 );
 
@@ -28,7 +28,7 @@ VALUES
 
 USE my_database1;
 CREATE TABLE teacher (
-    id INT AUTO_INCREMENT NOT NULL KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(45),
     age INT,
     country VARCHAR(45)
