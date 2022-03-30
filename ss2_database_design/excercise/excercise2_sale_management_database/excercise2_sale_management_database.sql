@@ -1,10 +1,10 @@
-drop database ss2_exercise_sale_management_database;
+
 create database ss2_exercise_sale_management_database;
 use ss2_exercise_sale_management_database;
 create table customer(
 		customer_id int auto_increment,
         customer_name varchar(50),
-        customer_age int,
+        customer_age tinyint,
         primary key (customer_id)
 );
 create table `order`(

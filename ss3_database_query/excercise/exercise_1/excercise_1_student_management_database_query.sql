@@ -1,1 +1,0 @@
-use ss2_practice_student_management;
