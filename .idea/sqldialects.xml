@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/case_study_database/TasK21ToTask28.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/case_study_database/Task2ToTask20.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/ss3_database_query/practice/practice_2/console.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/ss5_indexs_store_procedure_views/practice/practice_1/Index.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/ss5_indexs_store_procedure_views/practice/practice_3/PassParametersSP .sql" dialect="MySQL" />
   </component>
 </project>
