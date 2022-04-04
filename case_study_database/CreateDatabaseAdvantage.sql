@@ -1,6 +1,6 @@
-drop database if exists furama_database;
-create database if not exists furama_database;
-use furama_database;
+drop database if exists furama_database_advantage;
+create database if not exists furama_database_advantage;
+use furama_database_advantage;
 create table vi_tri
 (
     ma_vi_tri  int auto_increment,
@@ -102,10 +102,10 @@ create table hop_dong
     ma_hop_dong       int auto_increment,
     ngay_lam_hop_dong datetime not null,
     ngay_ket_thuc     datetime not null,
-    tien_dat_coc      double   not null,
-    ma_nhan_vien      int      not null,
-    ma_khach_hang     int      not null,
-    ma_dich_vu        int      not null,
+    tien_dat_coc      double,
+    ma_nhan_vien      int    ,
+    ma_khach_hang     int    ,
+    ma_dich_vu        int    ,
     primary key (ma_hop_dong),
     foreign key (ma_nhan_vien) references nhan_vien (ma_nhan_vien),
     foreign key (ma_khach_hang) references khach_hang (ma_khach_hang),
@@ -115,8 +115,8 @@ create table hop_dong
 create table hop_dong_chi_tiet
 (
     ma_hop_dong_chi_tiet int auto_increment,
-    ma_hop_dong          int not null,
-    ma_dich_vu_di_kem    int not null,
+    ma_hop_dong          int ,
+    ma_dich_vu_di_kem    int ,
     so_luong             int not null,
     primary key (ma_hop_dong_chi_tiet),
     foreign key (ma_hop_dong) references hop_dong (ma_hop_dong),
@@ -175,22 +175,22 @@ values ('Karaoke', 10000, 'giờ', 'tiện nghi, hiện tại'),
 insert into nhan_vien
 (ho_ten, ngay_sinh, so_cmnd, luong, so_dien_thoai, email, dia_chi, ma_vi_tri, ma_trinh_do, ma_bo_phan)
 values ('Nguyễn Văn An', '1970-11-07', '456231786', 10000000, '0901234121', 'annguyen@gmail.com',
-        '295 Nguyễn Tất Thành, Đà Nẵng', 1, 3, 1),
-       ('Lê Văn Bình', '1997-04-09', '654231234', 7000000, '0934212314', 'binhlv@gmail.com', '22 Yên Bái, Đà Nẵng', 1,
+        '295 Nguyễn Tất Thành,Hải Châu, Đà Nẵng', 1, 3, 1),
+       ('Lê Văn Bình', '1997-04-09', '654231234', 7000000, '0934212314', 'binhlv@gmail.com', '22 Yên Bái, Hải Châu,Đà Nẵng', 1,
         2, 2),
        ('Hồ Thị Yến', '1995-12-12', '999231723', 14000000, '0412352315', 'thiyen@gmail.com',
         'K234/11 Điện Biên Phủ, Gia Lai', 1, 3, 2),
        ('Võ Công Toản', '1980-04-04', '123231365', 17000000, '0374443232', 'toan0404@gmail.com',
         '77 Hoàng Diệu, Quảng Trị', 1, 4, 4),
        ('Nguyễn Bỉnh Phát', '1999-12-09', '454363232', 6000000, '0902341231', 'phatphat@gmail.com',
-        '43 Yên Bái, Đà Nẵng', 2, 1, 1),
+        '43 Yên Bái, Hải Châu, Đà Nẵng', 2, 1, 1),
        ('Khúc Nguyễn An Nghi', '2000-11-08', '964542311', 7000000, '0978653213', 'annghi20@gmail.com',
-        '294 Nguyễn Tất Thành, Đà Nẵng', 2, 2, 3),
+        '294 Nguyễn Tất Thành, Hải Châu, Đà Nẵng', 2, 2, 3),
        ('Nguyễn Hữu Hà', '1993-01-01', '534323231', 8000000, '0941234553', 'nhh0101@gmail.com',
         '4 Nguyễn Chí Thanh, Huế', 2, 3, 2),
        ('Nguyễn Hà Đông', '1989-09-03', '234414123', 9000000, '0642123111', 'donghanguyen@gmail.com',
         '111 Hùng Vương, Hà Nội', 2, 4, 4),
-       ('Tòng Hoang', '1982-09-03', '256781231', 6000000, '0245144444', 'hoangtong@gmail.com', '213 Hàm Nghi, Đà Nẵng',
+       ('Tòng Hoang', '1982-09-03', '256781231', 6000000, '0245144444', 'hoangtong@gmail.com', '213 Hàm Nghi, Hải Châu, Đà Nẵng',
         2, 4, 4),
        ('Nguyễn Công Đạo', '1994-01-08', '755434343', 8000000, '0988767111', 'nguyencongdao12@gmail.com',
         '6 Hoà Khánh, Đồng Nai', 2, 3, 2);
@@ -230,8 +230,8 @@ values ('Villa Beach Front', 25000, 10000000, 10, 'vip', 'Có hồ bơi', 500, 4
 
 insert into hop_dong
 (ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, ma_nhan_vien, ma_khach_hang, ma_dich_vu)
-values ('2020-12-08', '2020-12-08', 0, 3, 1, 3),
-       ('2020-07-14', '2020-07-21', 200000, 7, 3, 1),
+values ('2019-12-12', '2020-12-08', 0, 1, 1, 3),
+       ('2019-12-12', '2020-07-21', 200000, 6, 3, 1),
        ('2021-03-15', '2021-03-17', 50000, 3, 4, 2),
        ('2021-01-14', '2021-01-18', 100000, 7, 5, 5),
        ('2021-07-14', '2021-07-15', 0, 7, 2, 6),

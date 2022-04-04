@@ -140,7 +140,7 @@ from hop_dong hd
          inner join hop_dong_chi_tiet hdct on hd.ma_hop_dong = hdct.ma_hop_dong
          inner join dich_vu_di_kem dvdk on hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
 group by hdct.ma_dich_vu_di_kem
-having so_luong_dich_vu_di_kem >= (select sum(so_luong)
+having so_luong_dich_vu_di_kem = (select sum(so_luong)
                                    from hop_dong_chi_tiet
                                    group by ma_dich_vu_di_kem
                                    order by sum(so_luong) desc
@@ -175,17 +175,24 @@ having count(ma_hop_dong) <= 3
 order by ma_nhan_vien;
 
 # 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
-select nv.ma_nhan_vien, nv.ho_ten
+
+create OR REPLACE view v_nhan_vien_chua_co_hop_dong as
+select nv.ma_nhan_vien, nv.ho_ten , count(isnull( nv.ma_nhan_vien)) as so_hop_dong
 from nhan_vien nv
          left join hop_dong hd on nv.ma_nhan_vien = hd.ma_nhan_vien
-where hd.ma_nhan_vien is null;
 
-set sql_safe_updates = 0;
+where (year( ngay_ket_thuc) between 2019 and 2021
+or year(ngay_lam_hop_dong) between 2019 and 2021)
+GROUP BY nv.ma_nhan_vien
+HAVING so_hop_dong > 0 ;
+
+select * from v_nhan_vien_chua_co_hop_dong;
+
+set sql_safe_updates =0;
 delete nv
 from nhan_vien nv
-         left join hop_dong hd on nv.ma_nhan_vien = hd.ma_nhan_vien
-where hd.ma_nhan_vien is null;
-set sql_safe_updates = 1;
+where ma_nhan_vien  not in (select ma_nhan_vien from v_nhan_vien_chua_co_hop_dong) ;
+set sql_safe_updates =1;
 
 # 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, chỉ cập nhật những khách hàng đã
 # từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
@@ -222,16 +229,17 @@ create view khach_hang_can_xoa as
 select kh.ma_khach_hang
 from khach_hang kh
          inner join hop_dong hd on kh.ma_khach_hang = hd.ma_khach_hang
-where (year(ngay_lam_hop_dong) != 2021)
-  and (year(ngay_lam_hop_dong) = 2020);
+where (year(ngay_lam_hop_dong) < 2021);
 
 select *
 from khach_hang_can_xoa;
 
 set sql_safe_updates = 0;
 
--- Do not check foreign key constraints
-set foreign_key_checks = 0;
+alter table hop_dong
+drop foreign key hop_dong_ibfk_2;
+alter table hop_dong
+add constraint hop_dong_ibfk_2 foreign key (ma_khach_hang) references khach_hang (ma_khach_hang) on delete set null;
 
 delete kh
 from khach_hang kh
