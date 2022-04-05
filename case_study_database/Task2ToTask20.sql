@@ -191,7 +191,7 @@ select * from v_nhan_vien_chua_co_hop_dong;
 set sql_safe_updates =0;
 delete nv
 from nhan_vien nv
-where ma_nhan_vien  not in (select ma_nhan_vien from v_nhan_vien_chua_co_hop_dong) ;
+where ma_nhan_vien not in (select ma_nhan_vien from v_nhan_vien_chua_co_hop_dong) ;
 set sql_safe_updates =1;
 
 # 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, chỉ cập nhật những khách hàng đã

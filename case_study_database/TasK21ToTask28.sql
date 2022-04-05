@@ -210,18 +210,25 @@ begin
         add constraint hop_dong_chi_tiet_ibfk_1 foreign key (ma_hop_dong) references hop_dong (ma_hop_dong) on delete set null;
 
     drop temporary table if exists temp1;
-    CREATE TEMPORARY TABLE temp1 ENGINE = MEMORY
+    CREATE TEMPORARY TABLE temp1
     as (select dv.ma_dich_vu, hd.ma_hop_dong
         from dich_vu dv
                  inner join hop_dong hd on dv.ma_dich_vu = hd.ma_dich_vu
         where ma_loai_dich_vu = 3
           and year(ngay_lam_hop_dong) between 2015 and 2020);
+    CREATE VIEW view_temp
+    as
+    (
+    select dv.ma_dich_vu, hd.ma_hop_dong
+    from dich_vu dv
+             inner join hop_dong hd on dv.ma_dich_vu = hd.ma_dich_vu
+    where ma_loai_dich_vu = 3
+      and year(ngay_lam_hop_dong) between 2015 and 2020);
     set sql_safe_updates = 0;
-    delete from dich_vu where dich_vu.ma_dich_vu in (select ma_dich_vu from temp1);
+    delete from dich_vu where dich_vu.ma_dich_vu in (select ma_dich_vu from view_temp);
     delete from hop_dong where hop_dong.ma_hop_dong in (select ma_hop_dong from temp1);
     set sql_safe_updates = 1;
 end //
 delimiter ;
 
 call sp_xoa_dich_vu_va_hd_room;
-
