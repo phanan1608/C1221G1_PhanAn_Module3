@@ -1,0 +1,38 @@
+h2 {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2.5em;
+    padding: 3px;
+    margin: 0;
+}
+
+.sub {
+    font-weight: normal;
+    font-size: 1.2em;
+}
+
+.content {
+    text-indent: 10px;
+    font-size: 1.4em;
+    text-align: justify;
+}
+
+div {
+    width: 50%;
+}
+
+a:link {
+    color: #7ab1dc;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #522dd7;
+}
+
+a:hover {
+    color: hotpink;
+}
+
+a:active {
+    color: blue;
+}
