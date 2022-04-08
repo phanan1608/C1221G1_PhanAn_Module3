@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: poppins, serif;
+}
+
+a {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f0f2f5;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    height: 55px;
+}
+
+li {
+    display: inline;
+    float: left;
+    color: #455768;
+}
+
+a {
+    display: block;
+    padding: 10px 0 15px;
+    background-color: #dddddd;
+}
+
+li a {
+    width: 75px;
+    height: 30px;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    line-height: 30px;
+    background-color: white;
+    color: gray;
+    float: left;
+}
+
+img .icon {
+    top: 0;
+    width: 36px
+}
+
+li input {
+    font-family: "Helvetica Neue", sans-serif;
+    background-color: #f0f2f5;
+    border: none;
+    float: right;
+
+    font-size: 17px;
+    height: 26px;
+
+}
+
+#search-box {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background-color: #f0f2f5;
+    border-radius: 25px;
+    height: 36px;
+
+}
+
+#nav-left {
+    position: fixed;
+    left: 10px;
+    margin-left: 10px;
+    display: flex;
+    float: left;
+}
+
+#nav-mid {
+    position: relative;
+    left: 600px;
+    /*margin-left: 180px;*/
+    display: flex;
+    float: left;
+}
+
+#nav-mid li {
+    width: 120px;
+}
+
+#nav-right {
+    position: fixed;
+    right: 30px;
+    display: flex;
+    float: left;
+    width: 250px;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav-right li a {
+    width: 50px;
+}
+#nav-right li a span{
+    background-color: #e4e6eb;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+
+}
+.icon-more_detail,.icon-menu{
+    position: relative;
+    top: 6px;
+    color: black;
+}
+.icon-messenger,.icon-notification{
+    position: relative;
+    top: 8px;
+    color: black;
+}
+span {
+    background-color: red;
+    display: inline-block;
+    border-radius: 50%;
+}
+.information{
+    position: relative;
+    float: left;
+    background-color: red;
+    width: 200px;
+}
+#avatar{
+    position: relative;
+    display: inline;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    float: left;
+    right: 50px ;
+}
+
+
+

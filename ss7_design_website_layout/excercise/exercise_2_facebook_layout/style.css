@@ -1,0 +1,362 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica", serif;
+}
+
+a {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f0f2f5;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    height: 55px;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
+    z-index: 100;
+}
+
+span {
+    display: inline;
+    float: left;
+    color: #455768;
+}
+
+a {
+    display: block;
+    background-color: #f0f2f5;
+    text-decoration: none;
+}
+
+span a {
+    width: 40px;
+    display: flex;
+    text-decoration: none;
+    text-align: center;
+    line-height: 30px;
+    background-color: white;
+    color: gray;
+    float: left;
+}
+
+span a img {
+    width: 100%;
+    padding: 0;
+}
+
+img .icon {
+    top: 0;
+    width: 36px
+}
+
+span input {
+    font-family: "Helvetica Neue", sans-serif;
+    background-color: #f0f2f5;
+    border: none;
+    float: right;
+
+    font-size: 17px;
+    height: 26px;
+
+}
+
+#search-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    margin-left: 16px;
+    background-color: #f0f2f5;
+    border-radius: 25px;
+    height: 36px;
+
+}
+
+#nav-left {
+    position: fixed;
+    left: 10px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+}
+
+#nav-mid {
+    position: relative;
+    left: 600px;
+    /*margin-left: 180px;*/
+    display: flex;
+    float: left;
+}
+
+#nav-mid span {
+    width: 120px;
+}
+
+#nav-right {
+    position: fixed;
+    right: 50px;
+    display: flex;
+    float: left;
+    width: 250px;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav-right span a {
+    width: 50px;
+}
+
+#nav-right span a span {
+    position: relative;
+    right: 30px;
+    background-color: #e4e6eb;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+
+}
+
+.icon-more_detail, .icon-menu {
+    position: relative;
+    top: 6px;
+    color: black;
+}
+
+.icon-messenger, .icon-notification {
+    position: relative;
+    top: 8px;
+    color: black;
+}
+
+span {
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.information {
+    float: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    white-space: nowrap;
+    align-items: center;
+    margin-right: 40px;
+
+}
+
+#avatar {
+    position: relative;
+    display: inline;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    float: left;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.left-sidebar {
+    background-color: #f0f2f5;
+    flex-basis: 25%;
+    position: fixed;
+    padding-top: 5px;
+    top: 55px;
+    align-self: flex-start;
+    height: 100vh;
+}
+
+.right-sidebar {
+    background-color: #f0f2f5;
+    flex-basis: 20%;
+    position: sticky;
+    top: 55px;
+    align-self: flex-start;
+    height: 100vh;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #65676b;
+}
+
+
+.right-sidebar div img {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 128px;
+    border-radius: 10%;
+}
+
+.important-links a {
+    font-family: Helvetica, sans-serif;
+    padding: 4px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: #6c6c6e;
+    font-weight: bold;
+}
+
+.important-links img {
+    margin-right: 15px;
+}
+
+.sponsor1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sponsor1 p {
+    font-size: 1em;
+    padding-left: 10px;
+}
+
+.sponsor2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sponsor2 p {
+    font-size: 1em;
+    margin-left: 10px;
+}
+
+[class*=user] {
+    display: flex;
+    height: 45px;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+}
+
+[class*=user] p {
+    font-size: 1em;
+    margin-left: 10px;
+    color: #323233;
+}
+
+.contact {
+    padding-top: 10px;
+}
+
+.contact h4 {
+    display: inline;
+    font-size: 18px;
+}
+
+.contact svg {
+    display: inline;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 30px;
+    right: 0px;
+}
+
+
+
+
+
+/* main content*/
+.main-video{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    left: 30%;
+
+
+    width: 40%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    background-color: #f0f2f5;
+
+    align-items: flex-start;
+
+    color: #E4E6EB;
+}
+
+.main-video #status-box {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    height: 120px;
+}
+.main-video #status-box .status-box-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+.main-video #status-box .status-box-top .status-input{
+    background-color: #f0f2f5;
+    border: none;
+    width: 85%;
+    border-radius: 50px;
+    padding: 10px 10px;
+}
+.main-video #status-box .status-box-top .ico{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 8px;
+
+}
+.main-video #status-box .status-box-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.main-video #status-box .status-box-bottom .nav-panel{
+    display: flex;
+    min-width: 200px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 36px;
+    align-items: center;
+    border-radius: 14px;
+}
+.main-video #status-box .status-box-bottom .nav-panel:hover{
+    background-color: rgb(255, 255, 255);
+}
+.main-video #status-box .status-box-bottom .nav-panel .ico{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#right-panel {
+    width: 25%;
+    height: 100vh;
+    padding-left: 32px;
+    padding-right: 32px;
+    /*background-color: #165da3;*/
+}
+.loading {
+    margin: 0 auto;
+}
+
+.status-input::placeholder {
+    font-size: 20px;
+}
+
+
