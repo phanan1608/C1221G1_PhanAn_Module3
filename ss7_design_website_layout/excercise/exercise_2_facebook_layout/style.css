@@ -272,7 +272,7 @@ span {
 
 
 /* main content*/
-.main-video{
+.main-content{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -290,35 +290,35 @@ span {
     color: #E4E6EB;
 }
 
-.main-video #status-box {
+.main-content #status-box {
     width: 100%;
     padding: 10px;
     background-color: #ffffff;
     border-radius: 20px;
     height: 120px;
 }
-.main-video #status-box .status-box-top {
+.main-content #status-box .status-box-top {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 10px 0;
     margin-bottom: 10px;
 }
-.main-video #status-box .status-box-top .status-input{
+.main-content #status-box .status-box-top .status-input{
     background-color: #f0f2f5;
     border: none;
     width: 85%;
     border-radius: 50px;
     padding: 10px 10px;
 }
-.main-video #status-box .status-box-top .ico{
+.main-content #status-box .status-box-top .ico{
     display: flex;
     flex-direction: row;
     align-items: center;
     padding-left: 8px;
 
 }
-.main-video #status-box .status-box-bottom{
+.main-content #status-box .status-box-bottom{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -326,7 +326,7 @@ span {
     margin-top: 10px;
 }
 
-.main-video #status-box .status-box-bottom .nav-panel{
+.main-content #status-box .status-box-bottom .nav-panel{
     display: flex;
     min-width: 200px;
     flex-direction: row;
@@ -335,10 +335,10 @@ span {
     align-items: center;
     border-radius: 14px;
 }
-.main-video #status-box .status-box-bottom .nav-panel:hover{
+.main-content #status-box .status-box-bottom .nav-panel:hover{
     background-color: rgb(255, 255, 255);
 }
-.main-video #status-box .status-box-bottom .nav-panel .ico{
+.main-content #status-box .status-box-bottom .nav-panel .ico{
     display: flex;
     flex-direction: row;
     align-items: center;
