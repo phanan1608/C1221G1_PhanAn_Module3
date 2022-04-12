@@ -202,7 +202,6 @@ div.card-body {
     align-items: flex-start;
     }
 
-
 span.badge.badge-warning {
     margin: 0 20px;
     font-size: 0.9rem;
@@ -210,7 +209,6 @@ span.badge.badge-warning {
     background-color: #ffd800;
     font-weight: normal;
 }
-
 
 @media (max-width: 992px) {
     .navbar-expand-lg .navbar-nav .nav-link {
