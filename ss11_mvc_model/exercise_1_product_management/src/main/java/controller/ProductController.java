@@ -32,9 +32,7 @@ public class ProductController extends HttpServlet {
             case "edit":
                 updateProduct(request,response);
                 break;
-            case "delete":
-                deleteProduct(request,response);
-                break;
+
             case "search":
                 searchProduct(request,response);
                 break;
@@ -46,10 +44,11 @@ public class ProductController extends HttpServlet {
     private void searchProduct(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("main");
         String search_input = request.getParameter("search_input");
-        List<Product> productList = iProductService.getSearchList("Iphone13");
+        List<Product> productList = iProductService.getSearchList(search_input);
         request.setAttribute("products", productList);
+        request.setAttribute("search_input", search_input);
         try {
-            request.getRequestDispatcher("search.jsp").forward(request, response);
+            request.getRequestDispatcher("list.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -102,6 +101,7 @@ public class ProductController extends HttpServlet {
             response.sendRedirect("/product");
         } else {
             request.setAttribute("error",map);
+            request.setAttribute("product",product);
             request.getRequestDispatcher("create.jsp").forward(request,response);
         }
     }
@@ -121,7 +121,7 @@ public class ProductController extends HttpServlet {
                 showEditForm(request,response);
                 break;
             case "delete":
-                showDeleteForm(request,response);
+                deleteProduct(request,response);
                 break;
             case "view":
                 showViewForm(request,response);
@@ -178,7 +178,7 @@ public class ProductController extends HttpServlet {
         } else {
             request.setAttribute("product", product);
             try {
-                request.getRequestDispatcher("edit.jsp").forward(request, response);
+                request.getRequestDispatcher("view.jsp").forward(request, response);
             } catch (ServletException e) {
                 e.printStackTrace();
             } catch (IOException e) {

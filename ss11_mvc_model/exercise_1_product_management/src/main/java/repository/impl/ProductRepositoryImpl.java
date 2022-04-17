@@ -42,24 +42,45 @@ public class ProductRepositoryImpl implements IProductRepository {
 
     @Override
     public void remove(int id) {
-        productList.remove(id);
+        int index = -1;
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getId()==id){
+                index = i;
+            }
+        }
+        try {
+            productList.remove(index);
+        } catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(int id, Product product) {
-        productList.set(id, product);
+        int index = -1;
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getId()==id){
+                index = i;
+            }
+        }
+        try {
+            productList.set(index, product);
+        } catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
     }
 
 
     @Override
     public List<Product> getSearchList(String search_input) {
-        System.out.println("repo");
         List<Product> searchList = new ArrayList<>();
         for (Product product:productList) {
-            if (product.getNameProduct().toLowerCase().equals(search_input.toLowerCase())){
+            if (product.getNameProduct().toLowerCase().contains(search_input.toLowerCase())){
                 searchList.add(product);
             }
         }
+        System.out.println(searchList.size());
+
         return searchList;
     }
 }

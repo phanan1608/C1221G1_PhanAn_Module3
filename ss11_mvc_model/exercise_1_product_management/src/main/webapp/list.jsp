@@ -16,16 +16,17 @@
 <body>
 <div class="container">
     <h1 class="text-center">Product management</h1>
-    <a class="btn btn-primary" href="/product?action=create" style="margin: 10px 0">Create new product</a>
+    <a class="btn btn-primary float-left" href="/product?action=create" style="margin: 10px 0">Create new product</a>
     <form method="post" action="/product">
-        <div class="form-group">
+        <div class="form-group d-flex justify-content-end">
             <div class="form-outline">
-                <input name="search_input" type="search" id="form1" class="form-control"/>
+                <input name="search_input" value="${search_input}" type="search" id="form1" class="form-control col-9 float-left"/>
+                <input type="hidden" name="action" value="search">
+                <button type="submit" class="btn btn-info col-3">
+                    Search
+                </button>
             </div>
-            <button type="submit" class="btn btn-primary">
-                <a style="color: aliceblue;text-decoration: none" href="/product?action=search"> Search</i>
-                </a>
-            </button>
+
         </div>
     </form>
 
@@ -73,16 +74,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post">
+            <form>
                 <div class="modal-body">
                     <h3>Are you sure?</h3>
                     <div id="product_id"></div>
                     <div id="product_price"></div>
                     <div id="product_description"></div>
-<%--                    <input type="text" name="id" id="product_price">--%>
-<%--                    <input type="text" name="id" id="product_description">--%>
-
-                    <%--                    gửi action lên servlet--%>
+                    <%--gửi id cần xoá lên servlet--%>
+                    <input type="hidden" name="id" id="id_delete">
+                    <%--gửi action lên servlet--%>
                     <input type="hidden" name="action" value="delete">
                 </div>
                 <div class="modal-footer">
@@ -103,6 +103,7 @@
         crossorigin="anonymous"></script>
 <script>
     function confirmDelete(id, price, description) {
+        document.getElementById("id_delete").value = id;
         document.getElementById("product_id").innerText = "id: " + id;
         document.getElementById("product_price").innerText = "price: " + price;
         document.getElementById("product_description").innerText = "description: " + description;

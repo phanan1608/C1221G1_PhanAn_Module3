@@ -16,6 +16,7 @@
 <body>
 <div class="container">
     <h1 class="text-center">Search Product</h1>
+    <a class="btn btn-primary" href="/product">Back to Product List</a>
     <table class="table table-striped">
         <tr>
             <th>STT</th>

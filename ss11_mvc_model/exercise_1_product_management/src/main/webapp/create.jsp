@@ -23,16 +23,20 @@
                 <table class="table table-striped">
                     <tr>
                         <td>Name Product:</td>
-                        <td><input class="form-control" type="text" name="name_product" id="name_product">
+                        <td><input class="form-control" type="text" name="name_product" id="name_product"
+                                   value="${product.nameProduct}">
                             <p style="color: red">${error.get("nameProduct")} </p></td>
                     </tr>
                     <tr>
                         <td>Price:</td>
-                        <td><input class="form-control" type="number" name="price_product" id="price_product"></td>
+                        <td><input  class="form-control" type="number" name="price_product" id="price_product" value="${product.price}">
+                        </td>
                     </tr>
                     <tr>
+
                         <td>Description:</td>
-                        <td><input class="form-control" type="text" name="description_product" id="description_product">
+                        <td><input class="form-control" type="text" name="description_product" id="description_product" value="${product.description}">
+
                         </td>
                     </tr>
                     <tr>

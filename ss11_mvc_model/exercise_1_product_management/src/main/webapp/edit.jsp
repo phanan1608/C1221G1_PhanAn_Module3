@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="text-center">Delete Product</h1>
+    <h1 class="text-center">Edit Product</h1>
     <a class="btn btn-primary" href="/product">Back to Product List</a>
     <form method="post">
         <fieldset>
