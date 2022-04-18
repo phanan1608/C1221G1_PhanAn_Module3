@@ -24,7 +24,6 @@
     <div align="center">
         <form method="post">
             <table class="table table-striped">
-
                 <tr>
                     <th>User Name:</th>
                     <td>
