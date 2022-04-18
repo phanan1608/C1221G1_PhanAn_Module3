@@ -1,4 +1,9 @@
 package repository;
 
-public interface ICustomerRepository {
+import model.Customer;
+
+import java.util.List;
+
+public interface ICustomerRepository extends ICrudRepository<Customer> {
+    Customer findCustomerById(int id);
 }

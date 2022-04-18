@@ -206,13 +206,16 @@
                 <tr>
                     <th class="col-3">Name</th>
                     <td class="col-9">
-                        <input class="form-control" type="text" name="name"/>
+
+
+                        <input value="${customer_update.customerName}" class="form-control" type="text" name="name"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Birthday</th>
                     <td>
-                        <input class="form-control" type="date" name="birthday"/>
+                        <input value=" ${customer_update.customerBirthday}" class="form-control" type="date"
+                               name="birthday"/>
                     </td>
                 </tr>
                 <tr>
@@ -227,35 +230,38 @@
                 <tr>
                     <th>ID Card</th>
                     <td>
-                        <input class="form-control" type="text" name="id_card"/>
+                        <input value="${customer_update.customerIdCard}" class="form-control" type="text"
+                               name="id_card"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Phone</th>
                     <td>
-                        <input class="form-control" type="text" name="phone"/>
+                        <input value="${customer_update.customerPhone}" class="form-control"
+                               type="text" name="phone"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Email</th>
                     <td>
-                        <input class="form-control" type="text" name="email"/>
+                        <input value="${customer_update.customerEmail}"
+
+                        class="form-control" type="text" name="email"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td>
-                        <input class="form-control" type="text" name="address"/>
+                        <input value="${customer_update.customerAddress}" class="form-control" type="text" name="address"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Type Customer ID</th>
                     <td>
                         <select class="form-control" name="customer_type_id">
-                        <c:forEach var="type" items="${customer_type}">
-
+                            <c:forEach var="type" items="${customer_type}">
                                 <option value="${type.customerTypeId}">${type.customerTypeName}</option>
-                        </c:forEach>
+                            </c:forEach>
                         </select>
                     </td>
                 </tr>

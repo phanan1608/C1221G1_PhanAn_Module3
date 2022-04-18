@@ -1,4 +1,9 @@
 package service;
 
-public interface ICustomerService {
+import model.Customer;
+
+import java.util.List;
+
+public interface ICustomerService extends ICrudServices<Customer> {
+    Customer findCustomerById(int id);
 }

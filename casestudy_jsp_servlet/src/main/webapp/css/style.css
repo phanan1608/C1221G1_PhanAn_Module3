@@ -1,0 +1,43 @@
+* {
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    margin-left: 4rem;
+    font-size: 1.3rem;
+    padding: 0 1.5rem;
+    color: aliceblue;
+}
+
+.navbar-light .navbar-nav .active > .nav-link {
+    color: white;
+}
+
+
+.navbar-expand-lg .navbar-nav {
+    margin-right: 3rem;
+}
+
+.bg-light {
+    background-color: #046056 !important;
+}
+
+footer {
+    background-color: #f3f3f3 !important;
+    padding: 5px;
+}
+
+p {
+    margin-bottom: 0;
+
+}
+
+ul {
+    list-style-type: none;
+}
+
+footer {
+    background-color: #addccf !important;
+    color: #7f5b32;
+}
+

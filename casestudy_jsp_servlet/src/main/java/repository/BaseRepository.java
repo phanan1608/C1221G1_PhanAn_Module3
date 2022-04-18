@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class BaseRepository {
-    private String jdbcUrl = "jdbc:mysql://localhost:3306/demo";
+    private String jdbcUrl = "jdbc:mysql://localhost:3306/furama_database";
     private String username = "root";
     private String password = "codegym@2022";
     private Connection connection;
