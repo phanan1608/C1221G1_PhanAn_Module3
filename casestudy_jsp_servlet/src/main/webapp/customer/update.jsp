@@ -214,16 +214,25 @@
                 <tr>
                     <th>Birthday</th>
                     <td>
-                        <input value=" ${customer_update.customerBirthday}" class="form-control" type="date"
+                        <input value="${customer_update.customerBirthday}" class="form-control" type="date"
                                name="birthday"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Gender</th>
                     <td>
+                        <c:if test="${customer_update.customerGender eq 1}">
+                            <c:set var="isMale" scope="page" value="selected">
+
+                            </c:set>
+                        </c:if>
+                        <c:if test="${customer_update.customerGender eq 0}">
+                            <c:set var="isFemale" scope="page" value="selected">
+                            </c:set>
+                        </c:if>
                         <select class="form-control" name="gender" id="">
-                            <option value="0">Female</option>
-                            <option value="1">Male</option>
+                            <option value="0" ${isFemale}> Female</option>
+                            <option value="1" ${isMale} >Male</option>
                         </select>
                     </td>
                 </tr>
@@ -260,7 +269,9 @@
                     <td>
                         <select class="form-control" name="customer_type_id">
                             <c:forEach var="type" items="${customer_type}">
-                                <option value="${type.customerTypeId}">${type.customerTypeName}</option>
+                                <c:if test="${type.customerTypeId eq customer_update.customerTypeId}">
+                                    <option value="${type.customerTypeId}" selected>${type.customerTypeName} </option>
+                                </c:if>
                             </c:forEach>
                         </select>
                     </td>

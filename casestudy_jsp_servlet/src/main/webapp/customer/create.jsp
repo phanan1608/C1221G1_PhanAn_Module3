@@ -219,8 +219,8 @@
                     <th>Gender</th>
                     <td>
                         <select class="form-control" name="gender" id="">
-                            <option value="0">Female</option>
-                            <option value="1">Male</option>
+                            <option value="0" >Female</option>
+                            <option value="1" >Male</option>
                         </select>
                     </td>
                 </tr>
@@ -253,7 +253,6 @@
                     <td>
                         <select class="form-control" name="customer_type_id">
                         <c:forEach var="type" items="${customer_type}">
-
                                 <option value="${type.customerTypeId}">${type.customerTypeName}</option>
                         </c:forEach>
                         </select>

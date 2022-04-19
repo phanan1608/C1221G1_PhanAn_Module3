@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+<%--    Phân trang--%>
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 
@@ -195,75 +198,90 @@
 
 </header>
 
-<div class="container">
+<div class="container-fluid p-4 m-0">
     <h1 class="text-center">Customer List</h1>
-</div>
-<div class="col-11 mx-auto">
-    <div class="col-4 float-left mb-3">
+    <div class="mb-3 ms-0">
         <a class="btn btn-info " href="/customer?action=create">Add New Customer</a>
     </div>
-    <table class="table table-striped">
-
-        <tr style="background-color: #069A8E;color: white" >
-            <th>ID</th>
-            <th>Name</th>
-            <th>Birthday</th>
-            <th>Gender</th>
-            <th>ID Card</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Type</th>
-            <th>Function</th>
-        </tr>
-        <c:forEach var="customer" items="${customers}">
-            <tr>
-                <td><c:out value="${customer.customerId}"/></td>
-                <td><c:out value="${customer.customerName}"/></td>
-                <td><c:out value="${customer.customerBirthday}"/></td>
-                <td>
-                    <c:if test="${customer.customerGender eq 0}">
-                        Female
-                    </c:if>
-                    <c:if test="${customer.customerGender eq 1}">
-                        Male
-                    </c:if>
-                </td>
-                <td><c:out value="${customer.customerIdCard}"/></td>
-                <td><c:out value="${customer.customerPhone}"/></td>
-                <td><c:out value="${customer.customerEmail}"/></td>
-                <td><c:out value="${customer.customerAddress}"/></td>
-                <td>
-                    <c:forEach var="type" items="${customer_type}">
-                        <c:if test="${customer.customerTypeId eq type.customerTypeId}">
-                            ${type.customerTypeName}
-                            <%--                        <c:out value="${type.customerTypeName}"></c:out>--%>
-                        </c:if>
-                    </c:forEach>
-                </td>
-                <td>
-                    <a class="btn btn-warning" href="/customer?action=edit&id=${customer.customerId}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                        </svg>
-                    </a>
-
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop"
-                            onclick="confirmDelete(${customer.customerId},${customer.customerTypeId},'${customer.customerName}','${customer.customerBirthday}',
-                                ${customer.customerGender},'${customer.customerIdCard}','${customer.customerPhone}',
-                                    '${customer.customerEmail}','${customer.customerAddress}' )">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                        </svg>
-                        </a>
-                    </button>
-                </td>
-
+    <div class="container-fluid pl-0">
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+            <tr style="background-color: #069A8E;color: white">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Gender</th>
+                <th>ID Card</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Type</th>
+                <th>Function</th>
             </tr>
-        </c:forEach>
-    </table>
+            </thead>
+
+            <tbody>
+
+
+            <c:forEach var="customer" items="${customers}">
+                <tr>
+                    <td><c:out value="${customer.customerId}"/></td>
+                    <td><c:out value="${customer.customerName}"/></td>
+                    <td><c:out value="${customer.customerBirthday}"/></td>
+                    <td>
+                        <c:if test="${customer.customerGender eq 0}">
+                            Female
+                        </c:if>
+                        <c:if test="${customer.customerGender eq 1}">
+                            Male
+                        </c:if>
+                    </td>
+                    <td><c:out value="${customer.customerIdCard}"/></td>
+                    <td><c:out value="${customer.customerPhone}"/></td>
+                    <td><c:out value="${customer.customerEmail}"/></td>
+                    <td><c:out value="${customer.customerAddress}"/></td>
+                    <td>
+                        <c:forEach var="type" items="${customer_type}">
+                            <c:if test="${customer.customerTypeId eq type.customerTypeId}">
+                                ${type.customerTypeName}
+                                <%--                        <c:out value="${type.customerTypeName}"></c:out>--%>
+                            </c:if>
+                        </c:forEach>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="/customer?action=edit&id=${customer.customerId}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </a>
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop"
+                                onclick="confirmDelete(${customer.customerId},${customer.customerTypeId},'${customer.customerName}','${customer.customerBirthday}',
+                                    ${customer.customerGender},'${customer.customerIdCard}','${customer.customerPhone}',
+                                        '${customer.customerEmail}','${customer.customerAddress}' )">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                            </svg>
+                            </a>
+                        </button>
+                    </td>
+
+                </tr>
+
+            </c:forEach>
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
+
+
+
 <footer class="footer">
     <div class="col-sm mt-2 mt-sm-0 text-center">
         <hr>
@@ -355,6 +373,21 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
+
+<%--Phân trang--%>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
         crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#example').DataTable({
+            "dom": 'lrtip',
+        });
+    });
+
+</script>
