@@ -21,11 +21,21 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public void remove(int idDelete) {
-
+    employeeRepository.remove(idDelete);
     }
 
     @Override
     public void update(Employee employee) {
+        employeeRepository.update(employee);
+    }
 
+    @Override
+    public Employee findEmployeeById(int id) {
+        return employeeRepository.findEmployeeById(id);
+    }
+
+    @Override
+    public List<Employee> searchByName(String keyword) {
+        return employeeRepository.searchByName(keyword);
     }
 }

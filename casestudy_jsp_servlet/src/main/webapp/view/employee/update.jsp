@@ -1,17 +1,19 @@
 <%--
   Created by IntelliJ IDEA.
   User: ASUS
-  Date: 4/18/2022
-  Time: 3:43 PM
+  Date: 4/19/2022
+  Time: 5:12 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <html>
 <head>
-    <title>Update Customer Information</title>
+    <title>Update Employee Information</title>
     <link rel="shortcut icon" href="https://furamavietnam.com/wp-content/uploads/2018/07/favicon.png"
           type="image/x-icon">
 
@@ -155,10 +157,10 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link " href="/employee"> Employee<span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="/employee" style="color: #EAEF57;"> Employee<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link " href="/customer" style="color: #EAEF57;"> Customer<span
+                    <a class="nav-link " href="/customer"> Customer<span
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
@@ -196,9 +198,9 @@
 
 
 <div class="container">
-    <h1 class="text-center">Update Customer Information</h1>
+    <h1 class="text-center">Update Employee Information</h1>
     <h2>
-        <a class="btn btn-primary" href="/customer">Back to Customer List</a>
+        <a class="btn btn-primary" href="/employee">Back to Employee List</a>
     </h2>
     <div align="center">
         <form method="post">
@@ -206,72 +208,95 @@
                 <tr>
                     <th class="col-3">Name</th>
                     <td class="col-9">
-
-
-                        <input value="${customer_update.customerName}" class="form-control" type="text" name="name"/>
+                        <input class="form-control" value="${employee.employeeName}" type="text" name="name"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Birthday</th>
                     <td>
-                        <input value="${customer_update.customerBirthday}" class="form-control" type="date"
-                               name="birthday"/>
+                        <input class="form-control" value="${employee.employeeBirthday}" type="date" name="birthday"/>
                     </td>
                 </tr>
-                <tr>
-                    <th>Gender</th>
-                    <td>
-                        <c:if test="${customer_update.customerGender eq 1}">
-                            <c:set var="isMale" scope="page" value="selected">
 
-                            </c:set>
-                        </c:if>
-                        <c:if test="${customer_update.customerGender eq 0}">
-                            <c:set var="isFemale" scope="page" value="selected">
-                            </c:set>
-                        </c:if>
-                        <select class="form-control" name="gender" id="">
-                            <option value="0" ${isFemale}> Female</option>
-                            <option value="1" ${isMale} >Male</option>
-                        </select>
+                <tr>
+                    <th>Id Card</th>
+                    <td>
+                        <input class="form-control" value="${employee.employeeIdCard}" type="text" name="id_card"/>
                     </td>
                 </tr>
                 <tr>
-                    <th>ID Card</th>
+                    <th>Salary</th>
                     <td>
-                        <input value="${customer_update.customerIdCard}" class="form-control" type="text"
-                               name="id_card"/>
+                        <fmt:parseNumber type="number" var="salary" value="${employee.employeeSalary}" />
+                            <input class="form-control" value="${salary}" type="number" name="salary"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Phone</th>
                     <td>
-                        <input value="${customer_update.customerPhone}" class="form-control"
-                               type="text" name="phone"/>
+                        <input class="form-control" value="${employee.employeePhone}" type="text" name="phone"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Email</th>
                     <td>
-                        <input value="${customer_update.customerEmail}"
-
-                        class="form-control" type="text" name="email"/>
+                        <input class="form-control" value="${employee.employeeEmail}" type="text" name="email"/>
                     </td>
                 </tr>
+
                 <tr>
                     <th>Address</th>
                     <td>
-                        <input value="${customer_update.customerAddress}" class="form-control" type="text" name="address"/>
+                        <input class="form-control" value="${employee.employeeAddress}" type="text" name="address"/>
                     </td>
                 </tr>
                 <tr>
-                    <th>Type Customer ID</th>
+                    <th>Position Id</th>
                     <td>
-                        <select class="form-control" name="customer_type_id">
-                            <c:forEach var="type" items="${customer_type}">
-                                <c:if test="${type.customerTypeId eq customer_update.customerTypeId}">
-                                    <option value="${type.customerTypeId}" selected>${type.customerTypeName} </option>
-                                </c:if>
+                        <select class="form-control" name="position_id">
+                            <c:forEach var="position" items="${position}">
+                                <c:choose>
+                                    <c:when test="${employee.positionId eq position.positionId}">
+                                        <option value="${position.positionId}" selected>${position.positionName}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${position.positionId}">${position.positionName}</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Education Degree Id</th>
+                    <td>
+                        <select class="form-control" name="education_degree_id">
+                            <c:forEach var="education_degree" items="${education_degree}">
+                                <c:choose>
+                                    <c:when test="${education_degree.educationDegreeId eq employee.educationDegreeId}">
+                                        <option value="${education_degree.educationDegreeId}" selected>${education_degree.educationDegreeName}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${education_degree.educationDegreeId}">${education_degree.educationDegreeName}</option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Division Id</th>
+                    <td>
+                        <select class="form-control" name="division_id">
+                            <c:forEach var="division" items="${division}">
+                                <c:choose>
+                                    <c:when test="${division.divisionId eq employee.divisionId}">
+                                        <option value="${division.divisionId}" selected>${division.divisionName}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${division.divisionId}">${division.divisionName}</option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
                         </select>
                     </td>

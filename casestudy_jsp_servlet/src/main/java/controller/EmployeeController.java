@@ -40,8 +40,46 @@ public class EmployeeController extends HttpServlet {
             case "create":
                 createEmployee(request, response);
                 break;
+            case "edit":
+                updateEmployee(request,response);
+                break;
+            case "delete":
+                removeEmployee(request,response);
+                break;
         }
 
+    }
+
+    private void removeEmployee(HttpServletRequest request, HttpServletResponse response) {
+        int employeeId = Integer.parseInt(request.getParameter("id"));
+        employeeService.remove(employeeId);
+        try {
+            response.sendRedirect("/employee");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateEmployee(HttpServletRequest request, HttpServletResponse response) {
+        int employeeId = Integer.parseInt(request.getParameter("id"));
+        String employeeName       = request.getParameter("name")     ;
+        String employeeBirthday   = request.getParameter("birthday")          ;
+        String employeeIdCard     = request.getParameter("id_card")        ;
+        Double employeeSalary     = Double.valueOf(request.getParameter("salary"));
+        String employeePhone      = request.getParameter("phone")    ;
+        String employeeEmail      = request.getParameter("email")     ;
+        String employeeAddress    = request.getParameter("address")       ;
+        Integer positionId        = Integer.valueOf(request.getParameter("position_id"));
+        Integer educationDegreeId = Integer.valueOf(request.getParameter("education_degree_id"));
+        Integer divisionId        = Integer.valueOf(request.getParameter("division_id"));
+        Employee employee = new Employee(employeeId,employeeName,employeeBirthday,employeeIdCard,employeeSalary,
+                employeePhone,employeeEmail,employeeAddress,positionId,educationDegreeId,divisionId);
+        employeeService.update(employee);
+        try {
+            response.sendRedirect("/employee");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void createEmployee(HttpServletRequest request, HttpServletResponse response) {
@@ -77,8 +115,52 @@ public class EmployeeController extends HttpServlet {
             case "create":
                 showCreateForm(request, response);
                 break;
+            case "edit":
+                showUpdateForm(request,response);
+                break;
+            case "search":
+                searchByName(request,response);
+                break;
             default:
                 showListEmployee(request,response);
+        }
+    }
+
+    private void searchByName(HttpServletRequest request, HttpServletResponse response) {
+        String keyword = request.getParameter("keyword");
+        List<Employee> searchList =  employeeService.searchByName(keyword);
+        List<Position> positionList = positionService.getList();
+        List<EducationDegree> educationDegreeList = educationDegreeService.getList();
+        List<Division> divisionList = divisionService.getList();
+        request.setAttribute("employee",searchList);
+        request.setAttribute("position",positionList);
+        request.setAttribute("education_degree",educationDegreeList);
+        request.setAttribute("division",divisionList);
+        try {
+            request.getRequestDispatcher("view/employee/list.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showUpdateForm(HttpServletRequest request, HttpServletResponse response) {
+        int id  = Integer.parseInt(request.getParameter("id"));
+        Employee employee = employeeService.findEmployeeById(id);
+        List<Position> positionList = positionService.getList();
+        List<EducationDegree> educationDegreeList = educationDegreeService.getList();
+        List<Division> divisionList = divisionService.getList();
+        request.setAttribute("employee",employee);
+        request.setAttribute("position",positionList);
+        request.setAttribute("education_degree",educationDegreeList);
+        request.setAttribute("division",divisionList);
+        try {
+            request.getRequestDispatcher("view/employee/update.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

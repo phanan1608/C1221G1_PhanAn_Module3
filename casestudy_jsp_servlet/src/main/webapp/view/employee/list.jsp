@@ -161,10 +161,11 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link " href="#" style="color: #EAEF57;"> Employee<span  class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="#" style="color: #EAEF57;"> Employee<span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link " href="/customer" > Customer<span  class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="/customer"> Customer<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link " href="/service"> Service<span class="sr-only">(current)</span></a>
@@ -175,7 +176,7 @@
             </ul>
 
             <ul class="navbar-nav  ">
-                <li class="nav-item" >
+                <li class="nav-item">
                     <form method="get">
                         <div class="input-group d-flex justify-content-center h-100 align-items-center">
                             <input type="text" name="keyword" class="form-control rounded" placeholder="Search"
@@ -222,7 +223,7 @@
                 <th>Position Id</th>
                 <th>Education Id</th>
                 <th>Division Id</th>
-
+                <th class="col-1">Function</th>
             </tr>
             </thead>
 
@@ -235,7 +236,7 @@
                     <td><c:out value="${employee.employeeBirthday}"/></td>
                     <td><c:out value="${employee.employeeIdCard}"/></td>
                     <td>
-                        <fmt:formatNumber type="number" value="${employee.employeeSalary}" />
+                        <fmt:formatNumber type="number" value="${employee.employeeSalary}"/>
                     </td>
                     <td><c:out value="${employee.employeePhone}"/></td>
                     <td><c:out value="${employee.employeeEmail}"/></td>
@@ -265,8 +266,26 @@
                             </c:if>
                         </c:forEach>
                     </td>
+                    <td>
+                        <a class="btn btn-warning" href="/employee?action=edit&id=${employee.employeeId}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </a>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop"
+                                onclick="confirmDelete(${employee.employeeId},'${employee.employeeName}','${employee.employeeBirthday}','${employee.employeeIdCard}',
+                                    ${employee.employeeSalary},'${employee.employeePhone}','${employee.employeeEmail}',
+                                        '${employee.employeeAddress}',${employee.positionId},${employee.educationDegreeId},${employee.divisionId} )">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                            </svg>
+                        </button>
+                    </td>
                 </tr>
-
             </c:forEach>
             </tbody>
         </table>
@@ -311,59 +330,62 @@
 </footer>
 
 
-<%--<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"--%>
-<%--     aria-labelledby="staticBackdropLabel" aria-hidden="true">--%>
-<%--    <div class="modal-dialog">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--                <h5 class="modal-title" id="staticBackdropLabel">Delete Confirm</h5>--%>
-<%--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-<%--                    <span aria-hidden="true">&times;</span>--%>
-<%--                </button>--%>
-<%--            </div>--%>
-<%--            <form method="post">--%>
-<%--                <div class="modal-body">--%>
-<%--                    <h3>Do you want to delete customers with information: </h3>--%>
-<%--                    <div id="customer_id"></div>--%>
-<%--                    <div id="customer_typeId"></div>--%>
-<%--                    <div id="customer_name"></div>--%>
-<%--                    <div id="customer_birthday"></div>--%>
-<%--                    <div id="customer_gender"></div>--%>
-<%--                    <div id="customer_idCard"></div>--%>
-<%--                    <div id="customer_phone"></div>--%>
-<%--                    <div id="customer_email"></div>--%>
-<%--                    <div id="customer_address"></div>--%>
-
-<%--                    &lt;%&ndash;gửi id cần xoá lên servlet&ndash;%&gt;--%>
-<%--                    <input type="hidden" name="id" id="id_delete">--%>
-<%--                    &lt;%&ndash;gửi action lên servlet&ndash;%&gt;--%>
-<%--                    <input type="hidden" name="action" value="delete">--%>
-<%--                </div>--%>
-<%--                <div class="modal-footer">--%>
-<%--                    <button type="submit" class="btn btn-danger">Yes</button>--%>
-<%--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
-<%--                </div>--%>
-<%--            </form>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Delete Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <h3>Do you want to delete employee with information: </h3>
+                    <div id="employee_id"></div>
+                    <div id="employee_name"></div>
+                    <div id="employee_birthday"></div>
+                    <div id="employee_id_card"></div>
+                    <div id="employee_salary"></div>
+                    <div id="employee_phone"></div>
+                    <div id="employee_email"></div>
+                    <div id="employee_address"></div>
+                    <div id="employee_position_id"></div>
+                    <div id="employee_education_degree_id"></div>
+                    <div id="employee_division_id"></div>
+                    <%--gửi id cần xoá lên servlet--%>
+                    <input type="hidden" name="id" id="id_delete">
+                    <%--gửi action lên servlet--%>
+                    <input type="hidden" name="action" value="delete">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
-<%--<script>--%>
-<%--    function confirmDelete(id, typeId, name, birthday, gender, idCard, phone, email, address) {--%>
-<%--        document.getElementById("id_delete").value = id;--%>
-<%--        document.getElementById("customer_id").innerText = "id: " + id;--%>
-<%--        document.getElementById("customer_typeId").innerText = "type Id: " + typeId;--%>
-<%--        document.getElementById("customer_name").innerText = "name: " + name;--%>
-<%--        document.getElementById("customer_birthday").innerText = "birthday: " + birthday;--%>
-<%--        document.getElementById("customer_gender").innerText = "gender: " + gender;--%>
-<%--        document.getElementById("customer_idCard").innerText = "id card: " + idCard;--%>
-<%--        document.getElementById("customer_phone").innerText = "phone: " + phone;--%>
-<%--        document.getElementById("customer_email").innerText = "email: " + email;--%>
-<%--        document.getElementById("customer_address").innerText = "address: " + address;--%>
+<script>
 
-<%--    }--%>
-<%--</script>--%>
+    function confirmDelete(id, name, birthday, idCard, salary, phone, email, address, position_id, education_degree_id, division_id) {
+        document.getElementById("id_delete").value = id;
+        document.getElementById("employee_id").innerText = "id: " + id;
+        document.getElementById("employee_name").innerText = "name: " + name;
+        document.getElementById("employee_birthday").innerText = "birthday: " + birthday;
+        document.getElementById("employee_id_card").innerText = "idCard: " + idCard;
+        document.getElementById("employee_salary").innerText = "salary: " + salary;
+        document.getElementById("employee_phone").innerText = "phone: " + phone;
+        document.getElementById("employee_email").innerText = "email: " + email;
+        document.getElementById("employee_address").innerText = "address: " + address;
+        document.getElementById("employee_position_id").innerText = "position_id: " + position_id;
+        document.getElementById("employee_education_degree_id").innerText = "education_degree_id: " + education_degree_id;
+        document.getElementById("employee_division_id").innerText = "division_id: " + division_id;
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -371,6 +393,10 @@
 <%--Phân trang--%>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
 

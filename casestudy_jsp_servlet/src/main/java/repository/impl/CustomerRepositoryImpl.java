@@ -34,7 +34,6 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
                 customer.setCustomerAddress(resultSet.getString("dia_chi"));
                 customerList.add(customer);
             }
-            System.out.println(customerList.size());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
@@ -62,7 +61,6 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
             preparedStatement.setString(6, customer.getCustomerPhone());
             preparedStatement.setString(7, customer.getCustomerEmail());
             preparedStatement.setString(8, customer.getCustomerAddress());
-            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -174,7 +172,6 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
                 customer.setCustomerAddress(resultSet.getString("dia_chi"));
                 customerList.add(customer);
             }
-            System.out.println(customerList.size());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
