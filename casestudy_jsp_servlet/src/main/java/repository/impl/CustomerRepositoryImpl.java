@@ -82,7 +82,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
         try {
             preparedStatement = this.baseRepository.getConnectionJavaToDB()
                     .prepareStatement("delete from furama_database.khach_hang where ma_khach_hang=?");
-            preparedStatement.setInt(1,idDelete);
+            preparedStatement.setInt(1, idDelete);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -126,7 +126,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
 
         try {
             preparedStatement = this.baseRepository.getConnectionJavaToDB().prepareStatement("select * from furama_database.khach_hang where ma_khach_hang=?");
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 customer = new Customer();
@@ -150,5 +150,40 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
             }
         }
         return customer;
+    }
+
+    @Override
+    public List<Customer> searchByName(String keyword) {
+        List<Customer> customerList = new ArrayList<>();
+        Customer customer = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = this.baseRepository.getConnectionJavaToDB().prepareStatement("select * from furama_database.khach_hang where ho_ten like ?");
+            preparedStatement.setString(1, "%" + keyword + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                customer = new Customer();
+                customer.setCustomerId(resultSet.getInt("ma_khach_hang"));
+                customer.setCustomerTypeId(resultSet.getInt("ma_loai_khach"));
+                customer.setCustomerName(resultSet.getString("ho_ten"));
+                customer.setCustomerBirthday(resultSet.getString("ngay_sinh"));
+                customer.setCustomerGender(resultSet.getInt("gioi_tinh"));
+                customer.setCustomerIdCard(resultSet.getString("so_cmnd"));
+                customer.setCustomerPhone(resultSet.getString("so_dien_thoai"));
+                customer.setCustomerEmail(resultSet.getString("email"));
+                customer.setCustomerAddress(resultSet.getString("dia_chi"));
+                customerList.add(customer);
+            }
+            System.out.println(customerList.size());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return customerList;
     }
 }

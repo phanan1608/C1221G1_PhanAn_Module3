@@ -155,17 +155,17 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link " href="#"> Employee<span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="/employee"> Employee<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link " href="#" style="color: #EAEF57;"> Customer<span
+                    <a class="nav-link " href="/customer" style="color: #EAEF57;"> Customer<span
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link " href="#"> Service<span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="/service"> Service<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link " href="#"> Contract<span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="/contract"> Contract<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
@@ -206,73 +206,55 @@
                 <tr>
                     <th class="col-3">Name</th>
                     <td class="col-9">
-
-
-                        <input value="${customer_update.customerName}" class="form-control" type="text" name="name"/>
+                        <input class="form-control" type="text" name="name"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Birthday</th>
                     <td>
-                        <input value="${customer_update.customerBirthday}" class="form-control" type="date"
-                               name="birthday"/>
+                        <input class="form-control" type="date" name="birthday"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Gender</th>
                     <td>
-                        <c:if test="${customer_update.customerGender eq 1}">
-                            <c:set var="isMale" scope="page" value="selected">
-
-                            </c:set>
-                        </c:if>
-                        <c:if test="${customer_update.customerGender eq 0}">
-                            <c:set var="isFemale" scope="page" value="selected">
-                            </c:set>
-                        </c:if>
                         <select class="form-control" name="gender" id="">
-                            <option value="0" ${isFemale}> Female</option>
-                            <option value="1" ${isMale} >Male</option>
+                            <option value="0" >Female</option>
+                            <option value="1" >Male</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th>ID Card</th>
                     <td>
-                        <input value="${customer_update.customerIdCard}" class="form-control" type="text"
-                               name="id_card"/>
+                        <input class="form-control" type="text" name="id_card"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Phone</th>
                     <td>
-                        <input value="${customer_update.customerPhone}" class="form-control"
-                               type="text" name="phone"/>
+                        <input class="form-control" type="text" name="phone"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Email</th>
                     <td>
-                        <input value="${customer_update.customerEmail}"
-
-                        class="form-control" type="text" name="email"/>
+                        <input class="form-control" type="text" name="email"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td>
-                        <input value="${customer_update.customerAddress}" class="form-control" type="text" name="address"/>
+                        <input class="form-control" type="text" name="address"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Type Customer ID</th>
                     <td>
                         <select class="form-control" name="customer_type_id">
-                            <c:forEach var="type" items="${customer_type}">
-                                <c:if test="${type.customerTypeId eq customer_update.customerTypeId}">
-                                    <option value="${type.customerTypeId}" selected>${type.customerTypeName} </option>
-                                </c:if>
-                            </c:forEach>
+                        <c:forEach var="type" items="${customer_type}">
+                                <option value="${type.customerTypeId}">${type.customerTypeName}</option>
+                        </c:forEach>
                         </select>
                     </td>
                 </tr>

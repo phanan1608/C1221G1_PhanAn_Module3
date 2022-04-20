@@ -35,4 +35,9 @@ public class CustomerServiceImpl implements ICustomerService {
     public Customer findCustomerById(int id) {
         return customerRepository.findCustomerById(id);
     }
+
+    @Override
+    public List<Customer> searchByName(String keyword) {
+        return customerRepository.searchByName(keyword);
+    }
 }

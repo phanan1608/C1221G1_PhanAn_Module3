@@ -31,21 +31,6 @@
             <button class="btn btn-success col-2" type="submit" name="action" value="sort">Sort</button>
         </form>
     </div>
-    <div class="col-4 form-group d-flex justify-content-end">
-        <form action="/users">
-
-            <div class="form-outline">
-                <input name="search_input" value="${search_input}" type="search" id="form1"
-                       class="form-control col-9 float-left"/>
-                <input type="hidden" name="action" value="search">
-                <button type="submit" class="btn btn-info col-3">
-                    Search
-                </button>
-            </div>
-
-        </form>
-    </div>
-
     <div>
         <table class="table table-striped">
             <tr>
