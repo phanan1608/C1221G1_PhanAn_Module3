@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CustomerController", urlPatterns = "/customer")
 public class CustomerController extends HttpServlet {
@@ -39,11 +40,14 @@ public class CustomerController extends HttpServlet {
                 break;
             case "edit":
                 updateCustomer(request,response);
+//            default:
+//                showCustomerList(request, response);
         }
     }
 
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
+        String customerCode= request.getParameter("code");
         Integer customerTypeId = Integer.valueOf(request.getParameter("customer_type_id"));
         String customerName = request.getParameter("name");
         String customerBirthday = request.getParameter("birthday");
@@ -52,7 +56,7 @@ public class CustomerController extends HttpServlet {
         String customerPhone = request.getParameter("phone");
         String customerEmail = request.getParameter("email");
         String customerAddress = request.getParameter("address");
-        Customer customerUpdate = new Customer(id, customerTypeId, customerName, customerBirthday, customerGender,
+        Customer customerUpdate = new Customer(id,customerCode, customerTypeId, customerName, customerBirthday, customerGender,
                 customerIdCard, customerPhone, customerEmail, customerAddress);
         System.out.println(customerUpdate);
         customerService.update(customerUpdate);
@@ -74,7 +78,10 @@ public class CustomerController extends HttpServlet {
     }
 
     private void createCustomer(HttpServletRequest request, HttpServletResponse response) {
+        List<CustomerType> customerTypeList = customerTypeService.getList();
+        request.setAttribute("customer_type", customerTypeList);
         Integer id = null;
+        String customerCode = request.getParameter("code");
         Integer customerTypeId = Integer.valueOf(request.getParameter("customer_type_id"));
         String customerName = request.getParameter("name");
         String customerBirthday = request.getParameter("birthday");
@@ -83,16 +90,27 @@ public class CustomerController extends HttpServlet {
         String customerPhone = request.getParameter("phone");
         String customerEmail = request.getParameter("email");
         String customerAddress = request.getParameter("address");
-        Customer customer = new Customer(id, customerTypeId, customerName, customerBirthday, customerGender,
+        Customer customer = new Customer(id, customerCode,customerTypeId, customerName, customerBirthday, customerGender,
                 customerIdCard, customerPhone, customerEmail, customerAddress);
-        customerService.add(customer);
-        System.out.println(customer);
-        try {
-            response.sendRedirect("/customer");
-        } catch (IOException e) {
-            e.printStackTrace();
+        Map<String, String> map = customerService.addCustomer(customer);
+        if (map.isEmpty()){
+            try {
+                response.sendRedirect("/customer");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            request.setAttribute("error",map);
+            request.setAttribute("customer",customer);
+            try {
+                request.getRequestDispatcher("view/customer/create.jsp").forward(request,response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        ;
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

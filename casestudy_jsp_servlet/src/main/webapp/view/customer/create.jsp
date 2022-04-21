@@ -206,55 +206,89 @@
                 <tr>
                     <th class="col-3">Name</th>
                     <td class="col-9">
-                        <input class="form-control" type="text" name="name"/>
+                        <input value="${customer.customerName}" class="form-control" type="text" name="name"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Customer Code</th>
+                    <td>
+                        <input value="${customer.customerCode}"  class="form-control" type="text" name="code"/>
+                        <p style="color: red">${error.get("code")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Birthday</th>
                     <td>
-                        <input class="form-control" type="date" name="birthday"/>
+                        <input value="${customer.customerBirthday}"  class="form-control" type="date" name="birthday"/>
+                        <p style="color: red">${error.get("birthday")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Gender</th>
                     <td>
+                        <c:if test="${customer.customerGender eq 1}">
+                            <c:set var="isMale" scope="page" value="selected">
+
+                            </c:set>
+                        </c:if>
+                        <c:if test="${customer.customerGender eq 0}">
+                            <c:set var="isFemale" scope="page" value="selected">
+                            </c:set>
+                        </c:if>
                         <select class="form-control" name="gender" id="">
-                            <option value="0" >Female</option>
-                            <option value="1" >Male</option>
+                            <option value="0" ${isFemale}> Female</option>
+                            <option value="1" ${isMale} >Male</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th>ID Card</th>
                     <td>
-                        <input class="form-control" type="text" name="id_card"/>
+                        <input value="${customer.customerIdCard}"  class="form-control" type="text" name="id_card"/>
+                        <p style="color:red;">${error.get("id_card")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Phone</th>
                     <td>
-                        <input class="form-control" type="text" name="phone"/>
+                        <input value="${customer.customerPhone}"  class="form-control" type="text" name="phone"/>
+                        <p style="color:red;">${error.get("phone")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Email</th>
                     <td>
-                        <input class="form-control" type="text" name="email"/>
+                        <input value="${customer.customerEmail}"  class="form-control" type="text" name="email"/>
+                        <p style="color:red;">${error.get("email")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td>
-                        <input class="form-control" type="text" name="address"/>
+                        <input value="${customer.customerAddress}"  class="form-control" type="text" name="address"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Type Customer ID</th>
                     <td>
                         <select class="form-control" name="customer_type_id">
-                        <c:forEach var="type" items="${customer_type}">
-                                <option value="${type.customerTypeId}">${type.customerTypeName}</option>
-                        </c:forEach>
+                            <c:forEach var="type" items="${customer_type}">
+
+                                <c:choose>
+                                    <c:when test="${type.customerTypeId eq customer.customerTypeId}">
+                                        <option value="${type.customerTypeId}"
+                                                selected>${type.customerTypeName} </option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${type.customerTypeId}">${type.customerTypeName} </option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            <%--                            <c:forEach var="type" items="${customer_type}">--%>
+                            <%--                                <c:if test="${type.customerTypeId eq customer_update.customerTypeId}">--%>
+                            <%--                                    <option value="${type.customerTypeId}" selected>${type.customerTypeName} </option>--%>
+                            <%--                                </c:if>--%>
+                            <%--                            </c:forEach>--%>
                         </select>
                     </td>
                 </tr>

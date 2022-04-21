@@ -212,6 +212,13 @@
                     </td>
                 </tr>
                 <tr>
+                    <th>Code</th>
+                    <td>
+                        <input value="${customer_update.customerCode}" class="form-control" type="text"
+                               name="code"/>
+                    </td>
+                </tr>
+                <tr>
                     <th>Birthday</th>
                     <td>
                         <input value="${customer_update.customerBirthday}" class="form-control" type="date"
@@ -255,13 +262,14 @@
                     <td>
                         <input value="${customer_update.customerEmail}"
 
-                        class="form-control" type="text" name="email"/>
+                               class="form-control" type="text" name="email"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td>
-                        <input value="${customer_update.customerAddress}" class="form-control" type="text" name="address"/>
+                        <input value="${customer_update.customerAddress}" class="form-control" type="text"
+                               name="address"/>
                     </td>
                 </tr>
                 <tr>
@@ -269,10 +277,22 @@
                     <td>
                         <select class="form-control" name="customer_type_id">
                             <c:forEach var="type" items="${customer_type}">
-                                <c:if test="${type.customerTypeId eq customer_update.customerTypeId}">
-                                    <option value="${type.customerTypeId}" selected>${type.customerTypeName} </option>
-                                </c:if>
+
+                                <c:choose>
+                                    <c:when test="${type.customerTypeId eq customer_update.customerTypeId}">
+                                        <option value="${type.customerTypeId}"
+                                                selected>${type.customerTypeName} </option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${type.customerTypeId}">${type.customerTypeName} </option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
+                            <%--                            <c:forEach var="type" items="${customer_type}">--%>
+                            <%--                                <c:if test="${type.customerTypeId eq customer_update.customerTypeId}">--%>
+                            <%--                                    <option value="${type.customerTypeId}" selected>${type.customerTypeName} </option>--%>
+                            <%--                                </c:if>--%>
+                            <%--                            </c:forEach>--%>
                         </select>
                     </td>
                 </tr>

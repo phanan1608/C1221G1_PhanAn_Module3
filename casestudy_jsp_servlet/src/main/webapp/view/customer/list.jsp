@@ -213,6 +213,7 @@
             <thead>
             <tr style="background-color: #069A8E;color: white">
                 <th>ID</th>
+                <th>Code</th>
                 <th>Name</th>
                 <th>Birthday</th>
                 <th>Gender</th>
@@ -231,6 +232,7 @@
             <c:forEach var="customer" items="${customers}">
                 <tr>
                     <td><c:out value="${customer.customerId}"/></td>
+                    <td><c:out value="${customer.customerCode}"/></td>
                     <td><c:out value="${customer.customerName}"/></td>
                     <td><c:out value="${customer.customerBirthday}"/></td>
                     <td>

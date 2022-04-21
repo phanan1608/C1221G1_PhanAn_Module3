@@ -216,6 +216,7 @@
             <tr style="background-color: #069A8E;color: white">
 
                 <th>ID</th>
+                <th>Code</th>
                 <th>Name</th>
                 <th>Area</th>
                 <th>Cost</th>
@@ -235,6 +236,7 @@
             <c:forEach var="service" items="${services}">
                 <tr>
                     <td><c:out value="${service.serviceId}"/></td>
+                    <td><c:out value="${service.serviceCode}"/></td>
                     <td><c:out value="${service.serviceName}"/></td>
                     <td><c:out value="${service.serviceArea}"/></td>
                     <td>

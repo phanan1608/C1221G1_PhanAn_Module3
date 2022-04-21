@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Customer {
     private Integer customerId;
+    private String customerCode;
     private Integer customerTypeId;
     private String customerName;
     private String customerBirthday;
@@ -16,10 +17,9 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Integer customerId, Integer customerTypeId, String customerName, String customerBirthday,
-                    Integer customerGender, String customerIdCard, String customerPhone, String customerEmail,
-                    String customerAddress) {
+    public Customer(Integer customerId, String customerCode, Integer customerTypeId, String customerName, String customerBirthday, Integer customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress) {
         this.customerId = customerId;
+        this.customerCode = customerCode;
         this.customerTypeId = customerTypeId;
         this.customerName = customerName;
         this.customerBirthday = customerBirthday;
@@ -36,6 +36,14 @@ public class Customer {
 
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
+    }
+
+    public String getCustomerCode() {
+        return customerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
     }
 
     public Integer getCustomerTypeId() {
@@ -106,6 +114,7 @@ public class Customer {
     public String toString() {
         return "Customer{" +
                 "customerId=" + customerId +
+                ", customerCode='" + customerCode + '\'' +
                 ", customerTypeId=" + customerTypeId +
                 ", customerName='" + customerName + '\'' +
                 ", customerBirthday='" + customerBirthday + '\'' +

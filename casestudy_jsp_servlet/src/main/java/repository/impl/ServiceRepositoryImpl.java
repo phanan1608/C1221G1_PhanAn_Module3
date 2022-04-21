@@ -24,6 +24,7 @@ public class ServiceRepositoryImpl implements IServiceRepository {
             while (resultSet.next()) {
                 service = new Service();
                 service.setServiceId(resultSet.getInt("ma_dich_vu"));
+                service.setServiceCode(resultSet.getString("code_dich_vu"));
                 service.setServiceName(resultSet.getString("ten_dich_vu"));
                 service.setServiceArea(resultSet.getInt("dien_tich"));
                 service.setServiceCost(resultSet.getDouble("chi_phi_thue"));
@@ -55,19 +56,20 @@ public class ServiceRepositoryImpl implements IServiceRepository {
 
         try {
             preparedStatement = this.baseRepository.getConnectionJavaToDB()
-                    .prepareStatement("insert into dich_vu (ten_dich_vu, dien_tich, chi_phi_thue, so_nguoi_toi_da, ma_kieu_thue, ma_loai_dich_vu," +
+                    .prepareStatement("insert into dich_vu (code_dich_vu,ten_dich_vu, dien_tich, chi_phi_thue, so_nguoi_toi_da, ma_kieu_thue, ma_loai_dich_vu," +
                             "                     tieu_chuan_phong, mo_ta_tien_nghi, dien_tich_ho_boi, so_tang)" +
-                            "    value (?,?,?,?,?,?,?,?,?,?);");
-            preparedStatement.setString(1, service.getServiceName());
-            preparedStatement.setDouble(2, service.getPoolArea());
-            preparedStatement.setDouble(3, service.getServiceCost());
-            preparedStatement.setInt(4, service.getServiceMaxPeople());
-            preparedStatement.setInt(5, service.getRentTypeId());
-            preparedStatement.setInt(6, service.getServiceTypeId());
-            preparedStatement.setString(7, service.getStandardRoom());
-            preparedStatement.setString(8, service.getDescriptionOtherConvenience());
-            preparedStatement.setDouble(9, service.getPoolArea());
-            preparedStatement.setInt(10, service.getNumberOfFloor());
+                            "    value (?,?,?,?,?,?,?,?,?,?,?);");
+            preparedStatement.setString(1,service.getServiceCode());
+            preparedStatement.setString(2, service.getServiceName());
+            preparedStatement.setDouble(3, service.getPoolArea());
+            preparedStatement.setDouble(4, service.getServiceCost());
+            preparedStatement.setInt(5, service.getServiceMaxPeople());
+            preparedStatement.setInt(6, service.getRentTypeId());
+            preparedStatement.setInt(7, service.getServiceTypeId());
+            preparedStatement.setString(8, service.getStandardRoom());
+            preparedStatement.setString(9, service.getDescriptionOtherConvenience());
+            preparedStatement.setDouble(10, service.getPoolArea());
+            preparedStatement.setInt(11, service.getNumberOfFloor());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -24,6 +24,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
             while (resultSet.next()) {
                 customer = new Customer();
                 customer.setCustomerId(resultSet.getInt("ma_khach_hang"));
+                customer.setCustomerCode(resultSet.getString("code_khach_hang"));
                 customer.setCustomerTypeId(resultSet.getInt("ma_loai_khach"));
                 customer.setCustomerName(resultSet.getString("ho_ten"));
                 customer.setCustomerBirthday(resultSet.getString("ngay_sinh"));
@@ -52,15 +53,16 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
 
         try {
             preparedStatement = this.baseRepository.getConnectionJavaToDB()
-                    .prepareStatement("insert into furama_database.khach_hang( ma_loai_khach, ho_ten, ngay_sinh,gioi_tinh,so_cmnd,so_dien_thoai,email,dia_chi) VALUES (?,?,?,?,?,?,?,?);");
-            preparedStatement.setInt(1, customer.getCustomerTypeId());
-            preparedStatement.setString(2, customer.getCustomerName());
-            preparedStatement.setString(3, customer.getCustomerBirthday());
-            preparedStatement.setInt(4, customer.getCustomerGender());
-            preparedStatement.setString(5, customer.getCustomerIdCard());
-            preparedStatement.setString(6, customer.getCustomerPhone());
-            preparedStatement.setString(7, customer.getCustomerEmail());
-            preparedStatement.setString(8, customer.getCustomerAddress());
+                    .prepareStatement("insert into furama_database.khach_hang(code_khach_hang, ma_loai_khach, ho_ten, ngay_sinh,gioi_tinh,so_cmnd,so_dien_thoai,email,dia_chi) VALUES (?,?,?,?,?,?,?,?,?);");
+            preparedStatement.setString(1, customer.getCustomerCode());
+            preparedStatement.setInt(2, customer.getCustomerTypeId());
+            preparedStatement.setString(3, customer.getCustomerName());
+            preparedStatement.setString(4, customer.getCustomerBirthday());
+            preparedStatement.setInt(5, customer.getCustomerGender());
+            preparedStatement.setString(6, customer.getCustomerIdCard());
+            preparedStatement.setString(7, customer.getCustomerPhone());
+            preparedStatement.setString(8, customer.getCustomerEmail());
+            preparedStatement.setString(9, customer.getCustomerAddress());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -92,18 +94,19 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = this.baseRepository.getConnectionJavaToDB()
-                    .prepareStatement("update khach_hang set ma_loai_khach= ?, ho_ten =?,ngay_sinh =?," +
+                    .prepareStatement("update khach_hang set code_khach_hang=?, ma_loai_khach= ?, ho_ten =?,ngay_sinh =?," +
                             "gioi_tinh =?,so_cmnd =?,so_dien_thoai =?,email =?,dia_chi =? where ma_khach_hang = ?;");
-            preparedStatement.setInt(1, customer.getCustomerTypeId());
-            preparedStatement.setString(2, customer.getCustomerName());
-            preparedStatement.setString(3, customer.getCustomerBirthday());
-            preparedStatement.setInt(4, customer.getCustomerGender());
-            preparedStatement.setString(5, customer.getCustomerIdCard());
-            preparedStatement.setString(6, customer.getCustomerPhone());
-            preparedStatement.setString(7, customer.getCustomerEmail());
-            preparedStatement.setString(8, customer.getCustomerAddress());
-            preparedStatement.setInt(9, customer.getCustomerId());
-
+            preparedStatement.setString(1, customer.getCustomerCode());
+            preparedStatement.setInt(2, customer.getCustomerTypeId());
+            preparedStatement.setString(3, customer.getCustomerName());
+            preparedStatement.setString(4, customer.getCustomerBirthday());
+            preparedStatement.setInt(5, customer.getCustomerGender());
+            preparedStatement.setString(6, customer.getCustomerIdCard());
+            preparedStatement.setString(7, customer.getCustomerPhone());
+            preparedStatement.setString(8, customer.getCustomerEmail());
+            preparedStatement.setString(9, customer.getCustomerAddress());
+            preparedStatement.setInt(10, customer.getCustomerId());
+            System.out.println(customer);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -129,6 +132,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
             while (resultSet.next()) {
                 customer = new Customer();
                 customer.setCustomerId(resultSet.getInt("ma_khach_hang"));
+                customer.setCustomerCode(resultSet.getString("code_khach_hang"));
                 customer.setCustomerTypeId(resultSet.getInt("ma_loai_khach"));
                 customer.setCustomerName(resultSet.getString("ho_ten"));
                 customer.setCustomerBirthday(resultSet.getString("ngay_sinh"));
@@ -162,6 +166,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
             while (resultSet.next()) {
                 customer = new Customer();
                 customer.setCustomerId(resultSet.getInt("ma_khach_hang"));
+                customer.setCustomerCode(resultSet.getString("code_khach_hang"));
                 customer.setCustomerTypeId(resultSet.getInt("ma_loai_khach"));
                 customer.setCustomerName(resultSet.getString("ho_ten"));
                 customer.setCustomerBirthday(resultSet.getString("ngay_sinh"));

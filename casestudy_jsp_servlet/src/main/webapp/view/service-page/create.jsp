@@ -162,7 +162,8 @@
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link " href="/service" style="color: #EAEF57;"> Service<span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="/service" style="color: #EAEF57;"> Service<span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link " href="/contract"> Contract<span class="sr-only">(current)</span></a>
@@ -197,80 +198,112 @@
 
 <div class="container">
     <h1 class="text-center">Create Service</h1>
-        <h2>
-            <a class="btn btn-primary" href="/service">Back to Service List</a>
-        </h2>
+    <h2>
+        <a class="btn btn-primary" href="/service">Back to Service List</a>
+    </h2>
     <div align="center">
         <form method="post">
             <table class="table table-striped">
                 <tr>
+                    <th>Code</th>
+                    <td>
+                        <input value="${service.serviceCode}" class="form-control" type="text" name="code"/>
+                        <p style="color: red">${error.get("code")}</p>
+                    </td>
+                </tr>
+                <tr>
                     <th class="col-3">Name</th>
                     <td class="col-9">
-                        <input class="form-control" type="text" name="name"/>
+                        <input value="${service.serviceName}" class="form-control" type="text" name="name"/>
+                        <p style="color: red">${error.get("name")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Area</th>
                     <td>
-                        <input class="form-control" type="number" name="area"/>
+                        <input value="${service.serviceArea}" class="form-control" type="number" name="area"/>
+                        <p style="color: red">${error.get("area")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Cost</th>
                     <td>
-                        <input class="form-control" type="number" name="cost"/>
+                        <input value="${service.serviceCost}" step="0.01" class="form-control" type="number" name="cost"/>
+                        <p style="color: red">${error.get("cost")}</p>
+
                     </td>
                 </tr>
                 <tr>
                     <th>Max People</th>
                     <td>
-                        <input class="form-control" type="number" name="max_people"/>
+                        <input value="${service.serviceMaxPeople}" class="form-control" type="number" name="max_people"/>
+                        <p style="color: red">${error.get("max_people")}</p>
                     </td>
                 </tr>
                 <tr>
-
                     <th>Rent Type</th>
                     <td>
                         <select class="form-control" name="rent_type">
+                            <option >Choose your choice</option>
                             <c:forEach var="rentType" items="${rent_type}">
-                                <option value="${rentType.rentTypeId}">${rentType.rentTypeName}</option>
+                                <c:choose>
+                                    <c:when test="${rentType.rentTypeId eq service.rentTypeId}">
+                                        <option value="${rentType.rentTypeId}"
+                                                selected>${rentType.rentTypeName}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${rentType.rentTypeId}">${rentType.rentTypeName}</option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
                         </select>
+                        <p style="color: red">${error.get("rent_type")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Service Type</th>
                     <td>
                         <select class="form-control" name="service_type">
+                            <option >Choose your choice</option>
                             <c:forEach var="serviceType" items="${service_type}">
-                                <option value="${serviceType.serviceTypeId}">${serviceType.serviceTypeName}</option>
+                                <c:choose>
+                                    <c:when test="${serviceType.serviceTypeId eq service.serviceTypeId}">
+                                        <option value="${serviceType.serviceTypeId}" selected>${serviceType.serviceTypeName}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${serviceType.serviceTypeId}">${serviceType.serviceTypeName}</option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
                         </select>
+                        <p style="color: red">${error.get("service_type")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Standard Room</th>
                     <td>
-                        <input class="form-control" type="text" name="standard_room"/>
+                        <input value="${service.standardRoom}" class="form-control" type="text" name="standard_room"/>
                     </td>
                 </tr>
                 <tr>
                     <th>Other Convenience</th>
                     <td>
-                        <input class="form-control" type="text" name="convenience"/>
+                        <input value="${service.descriptionOtherConvenience}" class="form-control" type="text" name="convenience"/>
                     </td>
                 </tr>
 
                 <tr>
                     <th>Pool Area</th>
                     <td>
-                        <input class="form-control" type="number" name="pool_area"/>
+                        <input value="${service.poolArea}" class="form-control" type="number" name="pool_area"/>
+                        <p style="color: red">${error.get("pool_area")}</p>
                     </td>
                 </tr>
                 <tr>
                     <th>Number Of Floor</th>
                     <td>
-                        <input class="form-control" type="number" name="number_of_floor"/>
+                        <input value="${service.numberOfFloor}" class="form-control" type="number" name="number_of_floor"/>
+                        <p style="color: red">${error.get("number_of_floor")}</p>
                     </td>
                 </tr>
                 <input type="hidden" name="action" value="create">
