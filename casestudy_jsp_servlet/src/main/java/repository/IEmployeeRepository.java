@@ -11,4 +11,5 @@ public interface IEmployeeRepository extends ICrudRepository<Employee> {
 
     List<Employee> searchByName(String keyword);
 
+    List<Employee> searchManyField(String nameKeyword, String emailKeyword, String positionKeyword);
 }

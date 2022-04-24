@@ -62,25 +62,68 @@ public class EmployeeController extends HttpServlet {
     }
 
     private void updateEmployee(HttpServletRequest request, HttpServletResponse response) {
+        List<Position> positionList = positionService.getList();
+        List<EducationDegree> educationDegreeList = educationDegreeService.getList();
+        List<Division> divisionList = divisionService.getList();
         int employeeId = Integer.parseInt(request.getParameter("id"));
         String employeeName = request.getParameter("name");
         String employeeBirthday = request.getParameter("birthday");
         String employeeIdCard = request.getParameter("id_card");
-        Double employeeSalary = Double.valueOf(request.getParameter("salary"));
+        Double employeeSalary = null;
+        System.out.println(request.getParameter("salary"));
+        try {
+            employeeSalary = Double.valueOf(request.getParameter("salary"));
+            System.out.println(employeeSalary);
+        } catch (NumberFormatException e) {
+            e.getStackTrace();
+        }
+        Integer positionId = null;
+        try {
+            positionId = Integer.valueOf(request.getParameter("position_id"));
+        } catch (NumberFormatException e) {
+            e.getStackTrace();
+        }
+        Integer educationDegreeId = null;
+        try {
+            educationDegreeId = Integer.valueOf(request.getParameter("education_degree_id"));
+        } catch (NumberFormatException e) {
+            e.getStackTrace();
+        }
+        Integer divisionId = null;
+        try {
+            divisionId = Integer.valueOf(request.getParameter("division_id"));
+        } catch (NumberFormatException e) {
+            e.getStackTrace();
+        }
         String employeePhone = request.getParameter("phone");
         String employeeEmail = request.getParameter("email");
         String employeeAddress = request.getParameter("address");
-        Integer positionId = Integer.valueOf(request.getParameter("position_id"));
-        Integer educationDegreeId = Integer.valueOf(request.getParameter("education_degree_id"));
-        Integer divisionId = Integer.valueOf(request.getParameter("division_id"));
-        Employee employee = new Employee(employeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary,
+        Employee employeeUpdate = new Employee(employeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary,
                 employeePhone, employeeEmail, employeeAddress, positionId, educationDegreeId, divisionId);
-        employeeService.update(employee);
-        try {
-            response.sendRedirect("/employee");
-        } catch (IOException e) {
-            e.printStackTrace();
+        Map<String,String> map = employeeService.updateEmployee(employeeUpdate);
+        if (map.isEmpty()){
+            request.setAttribute("notification","Update successfully");
+            try {
+                response.sendRedirect("/employee");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            request.setAttribute("employee", employeeUpdate);
+            request.setAttribute("error", map);
+            request.setAttribute("position", positionList);
+            request.setAttribute("education_degree", educationDegreeList);
+            request.setAttribute("division", divisionList);
+            try {
+                request.getRequestDispatcher("view/employee/update.jsp").forward(request, response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
+
     }
 
     private void createEmployee(HttpServletRequest request, HttpServletResponse response) {
@@ -161,8 +204,32 @@ public class EmployeeController extends HttpServlet {
             case "search":
                 searchByName(request, response);
                 break;
+            case "search_many_field":
+                searchManyField(request,response);
+                break;
             default:
                 showListEmployee(request, response);
+        }
+    }
+
+    private void searchManyField(HttpServletRequest request, HttpServletResponse response) {
+        String nameKeyword = request.getParameter("name_keyword");
+        String emailKeyword = request.getParameter("email_keyword");
+        String positionKeyword = request.getParameter("position_keyword");
+        List<Employee> searchList = employeeService.searchManyField(nameKeyword,emailKeyword,positionKeyword);
+        List<Position> positionList = positionService.getList();
+        List<EducationDegree> educationDegreeList = educationDegreeService.getList();
+        List<Division> divisionList = divisionService.getList();
+        request.setAttribute("employee", searchList);
+        request.setAttribute("position", positionList);
+        request.setAttribute("education_degree", educationDegreeList);
+        request.setAttribute("division", divisionList);
+        try {
+            request.getRequestDispatcher("view/employee/list.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

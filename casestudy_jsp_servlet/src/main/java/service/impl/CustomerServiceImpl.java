@@ -85,7 +85,7 @@ public class CustomerServiceImpl implements ICustomerService {
         }
 
 //        regex Birthday
-        if (!customer.getCustomerBirthday().matches(Validate.DATE_TIME_FORMAT_REGEX)) {
+        if (!customer.getCustomerBirthday().matches(Validate.DATE_TIME_REGEX)) {
             map.put("birthday", "INVALID DATE FORMAT");
         } else {
             SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");

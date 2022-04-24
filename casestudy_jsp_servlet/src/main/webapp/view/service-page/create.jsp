@@ -228,7 +228,8 @@
                 <tr>
                     <th>Cost</th>
                     <td>
-                        <input value="${service.serviceCost}" step="0.01" class="form-control" type="number" name="cost"/>
+                        <input value="${service.serviceCost}" step="0.01" class="form-control" type="number"
+                               name="cost"/>
                         <p style="color: red">${error.get("cost")}</p>
 
                     </td>
@@ -236,7 +237,8 @@
                 <tr>
                     <th>Max People</th>
                     <td>
-                        <input value="${service.serviceMaxPeople}" class="form-control" type="number" name="max_people"/>
+                        <input value="${service.serviceMaxPeople}" class="form-control" type="number"
+                               name="max_people"/>
                         <p style="color: red">${error.get("max_people")}</p>
                     </td>
                 </tr>
@@ -244,7 +246,7 @@
                     <th>Rent Type</th>
                     <td>
                         <select class="form-control" name="rent_type">
-                            <option >Choose your choice</option>
+                            <option>Choose your choice</option>
                             <c:forEach var="rentType" items="${rent_type}">
                                 <c:choose>
                                     <c:when test="${rentType.rentTypeId eq service.rentTypeId}">
@@ -263,12 +265,13 @@
                 <tr>
                     <th>Service Type</th>
                     <td>
-                        <select class="form-control" name="service_type">
-                            <option >Choose your choice</option>
+                        <select class="form-control" name="service_type" id="service_select">
+                            <option>Choose your choice</option>
                             <c:forEach var="serviceType" items="${service_type}">
                                 <c:choose>
                                     <c:when test="${serviceType.serviceTypeId eq service.serviceTypeId}">
-                                        <option value="${serviceType.serviceTypeId}" selected>${serviceType.serviceTypeName}</option>
+                                        <option value="${serviceType.serviceTypeId}"
+                                                selected>${serviceType.serviceTypeName}</option>
                                     </c:when>
                                     <c:otherwise>
                                         <option value="${serviceType.serviceTypeId}">${serviceType.serviceTypeName}</option>
@@ -279,39 +282,83 @@
                         <p style="color: red">${error.get("service_type")}</p>
                     </td>
                 </tr>
-                <tr>
+                <%--                Villa: standard room, other, pool--%>
+
+                <tr class="villa_items" style="display: none">
                     <th>Standard Room</th>
                     <td>
                         <input value="${service.standardRoom}" class="form-control" type="text" name="standard_room"/>
                     </td>
                 </tr>
-                <tr>
+                <tr class="villa_items" style="display: none">
                     <th>Other Convenience</th>
                     <td>
-                        <input value="${service.descriptionOtherConvenience}" class="form-control" type="text" name="convenience"/>
+                        <input value="${service.descriptionOtherConvenience}" class="form-control" type="text"
+                               name="convenience"/>
                     </td>
                 </tr>
 
-                <tr>
+                <tr class="villa_items" style="display: none">
                     <th>Pool Area</th>
                     <td>
                         <input value="${service.poolArea}" class="form-control" type="number" name="pool_area"/>
                         <p style="color: red">${error.get("pool_area")}</p>
                     </td>
                 </tr>
-                <tr>
+                <tr class="house_items" style="display: none">
+                    <th>Standard Room</th>
+                    <td>
+                        <input value="${service.standardRoom}" class="form-control" type="text" name="standard_room"/>
+                    </td>
+                </tr>
+                <tr class="house_items" style="display: none">
                     <th>Number Of Floor</th>
                     <td>
-                        <input value="${service.numberOfFloor}" class="form-control" type="number" name="number_of_floor"/>
+                        <input value="${service.numberOfFloor}" class="form-control" type="number"
+                               name="number_of_floor"/>
                         <p style="color: red">${error.get("number_of_floor")}</p>
                     </td>
                 </tr>
-                <input type="hidden" name="action" value="create">
-                <tr>
-                    <td colspan="2" align="center">
-                        <button class="btn btn-primary" type="submit">Save</button>
+                <tr class="room_items" style="display: none">
+                    <th>Other Convenience</th>
+                    <td>
+                        <input value="${service.descriptionOtherConvenience}" class="form-control" type="text"
+                               name="convenience"/>
                     </td>
                 </tr>
+                <%--                <tr>--%>
+                <%--                    <th>Standard Room</th>--%>
+                <%--                    <td>--%>
+                <%--                        <input value="${service.standardRoom}" class="form-control" type="text" name="standard_room"/>--%>
+                <%--                    </td>--%>
+                <%--                </tr>--%>
+                <%--                <tr>--%>
+                <%--                    <th>Other Convenience</th>--%>
+                <%--                    <td>--%>
+                <%--                        <input value="${service.descriptionOtherConvenience}" class="form-control" type="text" name="convenience"/>--%>
+                <%--                    </td>--%>
+                <%--                </tr>--%>
+
+                <%--                <tr>--%>
+                <%--                    <th>Pool Area</th>--%>
+                <%--                    <td>--%>
+                <%--                        <input value="${service.poolArea}" class="form-control" type="number" name="pool_area"/>--%>
+                <%--                        <p style="color: red">${error.get("pool_area")}</p>--%>
+                <%--                    </td>--%>
+                <%--                </tr>--%>
+                <%--                <tr>--%>
+                <%--                    <th>Number Of Floor</th>--%>
+                <%--                    <td>--%>
+                <%--                        <input value="${service.numberOfFloor}" class="form-control" type="number" name="number_of_floor"/>--%>
+                <%--                        <p style="color: red">${error.get("number_of_floor")}</p>--%>
+                <%--                    </td>--%>
+                <%--                </tr>--%>
+                <%--                <input type="hidden" name="action" value="create">--%>
+                <%--                <tr>--%>
+                <%--                    <td colspan="2" align="center">--%>
+                <%--                        <button class="btn btn-primary" type="submit">Save</button>--%>
+                <%--                    </td>--%>
+                <%--                </tr>--%>
             </table>
         </form>
     </div>
@@ -359,5 +406,78 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
         crossorigin="anonymous"></script>
->
-</html>
+<script>
+    $(document).ready(function () {
+        $("#service_select").change(function () {
+            if (this.value == 1) {
+                $(".villa_items").each(function () {
+                    $(this).css({"display": ""})
+                });
+                $(".house_items").each(function () {
+                    $(this).css({"display": "none"})
+                });
+                $(".room_items").each(function () {
+                    $(this).css({"display": "none"})
+                });
+                $(".house_items").find("input").each(function () {
+                    $(this).val("");
+                })
+                $(".room_items").find("input").each(function () {
+                    $(this).val("");
+                })
+            } else if (this.value == 2) {
+                $(".villa_items").each(function () {
+                    $(this).css({"display": "none"})
+                });
+                $(".house_items").each(function () {
+                    $(this).css({"display": ""})
+                });
+                $(".room_items").each(function () {
+                    $(this).css({"display": "none"})
+                });
+                $(".villa_items").find("input").each(function () {
+                    $(this).val("");
+                })
+                $(".room_items").find("input").each(function () {
+                    $(this).val("");
+                })
+            } else if (this.value == 3) {
+                $(".villa_items").each(function () {
+                    $(this).css({"display": "none"})
+                });
+                $(".house_items").each(function () {
+                    $(this).css({"display": "none"})
+                });
+                $(".room_items").each(function () {
+                    $(this).css({"display": ""})
+                });
+                $(".villa_items").find("input").each(function () {
+                    $(this).val("");
+                })
+                $(".house_items").find("input").each(function () {
+                    $(this).val("");
+                })
+            }  else {
+                $(".villa_items").each(function () {
+                    $(this).css({"display": "none"})
+                });
+                $(".house_items").each(function () {
+                    $(this).css({"display": "none"})
+                });
+                $(".room_items").each(function () {
+                    $(this).css({"display": "none"})
+                });
+                $(".villa_items").find("input").each(function () {
+                    $(this).val("");
+                })
+                $(".house_items").find("input").each(function () {
+                    $(this).val("");
+                })
+                $(".room_items").find("input").each(function () {
+                    $(this).val("");
+                })
+            }
+        })
+
+    })
+</script>

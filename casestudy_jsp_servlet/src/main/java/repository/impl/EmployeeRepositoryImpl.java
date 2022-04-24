@@ -196,4 +196,59 @@ public class EmployeeRepositoryImpl implements IEmployeeRepository {
         }
         return employeeList;
     }
+
+    @Override
+    public List<Employee> searchManyField(String nameKeyword, String emailKeyword, String positionKeyword) {
+        List<Employee> employeeList = new ArrayList<>();
+        Employee employee = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = this.baseRepository.getConnectionJavaToDB().prepareStatement("select * from furama_database.nhan_vien where ho_ten like ? and email like ? and cast(ma_vi_tri as char) like ? ");
+            preparedStatement.setString(1, "%"+nameKeyword+"%");
+            preparedStatement.setString(2, "%"+emailKeyword+"%");
+            preparedStatement.setString(3, positionKeyword);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                employee = new Employee();
+                employee.setEmployeeId(resultSet.getInt("ma_nhan_vien"));
+                employee.setEmployeeName(resultSet.getString("ho_ten"));
+                employee.setEmployeeBirthday(resultSet.getString("ngay_sinh"));
+                employee.setEmployeeIdCard(resultSet.getString("so_cmnd"));
+                employee.setEmployeeSalary(resultSet.getDouble("luong"));
+                employee.setEmployeePhone(resultSet.getString("so_dien_thoai"));
+                employee.setEmployeeEmail(resultSet.getString("email"));
+                employee.setEmployeeAddress(resultSet.getString("dia_chi"));
+                employee.setPositionId(resultSet.getInt("ma_vi_tri"));
+                employee.setEducationDegreeId(resultSet.getInt("ma_trinh_do"));
+                employee.setDivisionId(resultSet.getInt("ma_bo_phan"));
+                employeeList.add(employee);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return employeeList;
+    }
+
+    private void printSQLException(SQLException ex) {
+        for (Throwable e : ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
+    }
 }

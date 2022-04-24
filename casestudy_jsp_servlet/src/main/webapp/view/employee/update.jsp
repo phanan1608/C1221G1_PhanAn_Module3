@@ -209,12 +209,14 @@
                     <th class="col-3">Name</th>
                     <td class="col-9">
                         <input class="form-control" value="${employee.employeeName}" type="text" name="name"/>
+                        <small style="color: red;">${error.get("name")}</small>
                     </td>
                 </tr>
                 <tr>
                     <th>Birthday</th>
                     <td>
                         <input class="form-control" value="${employee.employeeBirthday}" type="date" name="birthday"/>
+                        <small style="color: red;">${error.get("birthday")}</small>
                     </td>
                 </tr>
 
@@ -222,25 +224,35 @@
                     <th>Id Card</th>
                     <td>
                         <input class="form-control" value="${employee.employeeIdCard}" type="text" name="id_card"/>
+                        <small style="color: red;">${error.get("id_card")}</small>
                     </td>
                 </tr>
                 <tr>
                     <th>Salary</th>
                     <td>
-                        <fmt:parseNumber type="number" var="salary" value="${employee.employeeSalary}" />
-                            <input class="form-control" value="${salary}" type="number" name="salary"/>
+                        <%--                        <fmt:parseNumber type="number" var="salary" value="${employee.employeeSalary}"/>--%>
+                        <%--                        <fmt:formatNumber type="number" value="${salary}"/>--%>
+
+                            <fmt:formatNumber var="salary" value="${employee.getEmployeeSalary()}"
+                                          type="number" pattern="0"/>
+                        <input class="form-control" value="${salary}" type="number"
+                               name="salary"/>
+                        <%--                        <p>${employee.employeeSalary}</p>--%>
+                        <small style="color: red;">${error.get("salary")}</small>
                     </td>
                 </tr>
                 <tr>
                     <th>Phone</th>
                     <td>
                         <input class="form-control" value="${employee.employeePhone}" type="text" name="phone"/>
+                        <small style="color: red;">${error.get("phone")}</small>
                     </td>
                 </tr>
                 <tr>
                     <th>Email</th>
                     <td>
                         <input class="form-control" value="${employee.employeeEmail}" type="text" name="email"/>
+                        <small style="color: red;">${error.get("email")}</small>
                     </td>
                 </tr>
 
@@ -248,6 +260,7 @@
                     <th>Address</th>
                     <td>
                         <input class="form-control" value="${employee.employeeAddress}" type="text" name="address"/>
+                        <small style="color: red;">${error.get("address")}</small>
                     </td>
                 </tr>
                 <tr>
@@ -257,7 +270,8 @@
                             <c:forEach var="position" items="${position}">
                                 <c:choose>
                                     <c:when test="${employee.positionId eq position.positionId}">
-                                        <option value="${position.positionId}" selected>${position.positionName}</option>
+                                        <option value="${position.positionId}"
+                                                selected>${position.positionName}</option>
                                     </c:when>
                                     <c:otherwise>
                                         <option value="${position.positionId}">${position.positionName}</option>
@@ -265,6 +279,7 @@
                                 </c:choose>
                             </c:forEach>
                         </select>
+                        <small style="color: red;">${error.get("position")}</small>
                     </td>
                 </tr>
                 <tr>
@@ -274,7 +289,8 @@
                             <c:forEach var="education_degree" items="${education_degree}">
                                 <c:choose>
                                     <c:when test="${education_degree.educationDegreeId eq employee.educationDegreeId}">
-                                        <option value="${education_degree.educationDegreeId}" selected>${education_degree.educationDegreeName}</option>
+                                        <option value="${education_degree.educationDegreeId}"
+                                                selected>${education_degree.educationDegreeName}</option>
                                     </c:when>
                                     <c:otherwise>
                                         <option value="${education_degree.educationDegreeId}">${education_degree.educationDegreeName}</option>
@@ -282,16 +298,19 @@
                                 </c:choose>
                             </c:forEach>
                         </select>
+                        <small style="color: red;">${error.get("education")}</small>
                     </td>
                 </tr>
                 <tr>
                     <th>Division Id</th>
                     <td>
                         <select class="form-control" name="division_id">
+                            <option value="">Choose your choice</option>
                             <c:forEach var="division" items="${division}">
                                 <c:choose>
                                     <c:when test="${division.divisionId eq employee.divisionId}">
-                                        <option value="${division.divisionId}" selected>${division.divisionName}</option>
+                                        <option value="${division.divisionId}"
+                                                selected>${division.divisionName}</option>
                                     </c:when>
                                     <c:otherwise>
                                         <option value="${division.divisionId}">${division.divisionName}</option>
@@ -299,6 +318,7 @@
                                 </c:choose>
                             </c:forEach>
                         </select>
+                        <small style="color: red;">${error.get("division")}</small>
                     </td>
                 </tr>
                 <tr>

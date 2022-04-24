@@ -202,11 +202,37 @@
 
 </header>
 
-<div class="container-fluid p-4 m-0">
-    <h1 class="text-center">Employee List</h1>
-    <div class="mb-3 ms-0">
+<div class="container-fluid p-4 m-0 ">
+    <h1 class="text-center ">Employee List</h1>
+    <div class="mb-3 ms-0 d-flex float-left">
         <a class="btn btn-info " href="/employee?action=create">Add New Employee</a>
     </div>
+    <form method="get">
+        <div class="input-group row ">
+            <div class="form-outline">
+                <input type="search" name="name_keyword" placeholder="Name" class="form-control"/>
+            </div>
+            <div class="form-outline  d-inline">
+                <input type="search" name="email_keyword" placeholder="Email" class="form-control"/>
+            </div>
+            <div class="form-outline  d-inline">
+                <select class="form-control" name="position_keyword">
+                    <option value="%">Choose your choice</option>
+                    <c:forEach var="position" items="${position}">
+                        <option value="${position.positionId}">${position.positionName}</option>
+                    </c:forEach>
+                </select>
+                <input type="hidden" name="action" value="search_many_field">
+            </div>
+            <button id="search-button" type="submit" class="btn btn-primary">
+                <svg class="bi bi-search" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
+        </div>
+    </form>
+
     <div class="container-fluid pl-0">
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
